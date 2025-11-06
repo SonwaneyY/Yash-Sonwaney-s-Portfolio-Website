@@ -2,43 +2,76 @@
 
 This directory contains examples from designers whose portfolios inspire you and whose writing style you admire.
 
+## Quick Start
+
+1. **Copy the template**: Duplicate `_TEMPLATE.md` and rename it (e.g., `jane-smith.md`)
+2. **Add the portfolio URL** at the top
+3. **Fill out the sections** that are most relevant - you don't need to complete everything!
+4. **Copy actual text** from their portfolio - specific examples are more valuable than summaries
+5. **Save it** - The slash commands will automatically reference these files
+
 ## What to Include
 
-- **Portfolio URLs** - Links to designer websites (save as markdown files)
-- **Screenshots** - Captures of particularly good sections
-- **PDFs** - Saved versions of portfolio pages
-- **Notes** - What specifically you like about each example
+- **Portfolio URLs** - Links to designer websites
+- **Actual copy** - Paste real examples of titles, descriptions, etc.
+- **Screenshots** - (Optional) Captures of particularly good sections
+- **PDFs** - (Optional) Saved versions of portfolio pages
+- **Your analysis** - What specifically you like and why
 
-## Suggested Format
+## Two Ways to Document
 
-Create a markdown file for each role model:
+### Option A: Use the Template (Comprehensive)
+
+Copy `_TEMPLATE.md` and rename it to the designer's name. The template includes sections for:
+- Navigation and structure
+- Project titles with examples
+- About page analysis
+- Case study writing style
+- Image captions
+- Tone and voice characteristics
+- SEO approach
+- Specific copy examples
+
+**Best for:** When you want deep analysis and have time to study the portfolio thoroughly.
+
+### Option B: Quick Format (Faster)
+
+Create a simpler markdown file with just the essentials:
 
 ```markdown
 # Designer Name
 
 **Portfolio URL**: https://example.com
 
-## What I Admire
+## What I Like
 
-- Clear, concise project descriptions
-- Strong use of action verbs
-- Balance of technical and human-centered language
+[Brief summary - e.g., "Clear storytelling, strong outcomes focus, conversational tone"]
 
-## Key Examples
+## Project Title Examples
 
-### Project Title Style
-"Building trust through transparency: Redesigning the healthcare provider dashboard"
+"[Copy actual title]" - Shows domain + transformation
+"[Copy actual title]" - Action-oriented, includes user benefit
 
-### About Page Voice
-Personal yet professional, focuses on impact over credentials
+## About Page Opening
 
-### Image Captions
-Descriptive but brief, always explains the "why"
+"[Copy their hero statement or first paragraph]"
 
-## Screenshots/References
+Why it works: [Your notes]
 
-[Attach or link to specific examples]
+## Case Study Writing
+
+[Copy a paragraph that shows their style well]
+
+Why I like it: [Your analysis]
+
+## Tone & Voice
+
+- Professional but approachable
+- First person throughout
+- Balances technical with accessible
 ```
+
+**Best for:** Quick capture when you find a good portfolio and want to document it fast.
 
 ## Analysis Questions
 
