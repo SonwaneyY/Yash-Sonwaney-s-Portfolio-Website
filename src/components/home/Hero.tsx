@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
 import { siteConfig, experience } from "@/lib/data";
 import styles from "./Hero.module.css";
@@ -16,7 +17,7 @@ function AnimatedName({ text, className, delay = 0 }: { text: string; className:
         animate="visible"
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.035, delayChildren: delay } },
+          visible: { transition: { staggerChildren: 0.04, delayChildren: delay } },
         }}
         style={{ display: "inline-flex" }}
       >
@@ -24,8 +25,8 @@ function AnimatedName({ text, className, delay = 0 }: { text: string; className:
           <motion.span
             key={i}
             variants={{
-              hidden: { y: "100%", opacity: 0 },
-              visible: { y: "0%", opacity: 1, transition: { duration: 0.6, ease } },
+              hidden: { y: "110%", opacity: 0 },
+              visible: { y: "0%", opacity: 1, transition: { duration: 0.7, ease } },
             }}
             style={{ display: "inline-block", overflow: "hidden" }}
           >
@@ -38,14 +39,60 @@ function AnimatedName({ text, className, delay = 0 }: { text: string; className:
 }
 
 export default function Hero() {
+  const [phase, setPhase] = useState<"intro" | "reveal">("intro");
+
+  useEffect(() => {
+    // Hide header during intro
+    document.body.classList.add("intro-active");
+
+    const timer = setTimeout(() => {
+      setPhase("reveal");
+      document.body.classList.remove("intro-active");
+    }, 2600);
+    return () => {
+      clearTimeout(timer);
+      document.body.classList.remove("intro-active");
+    };
+  }, []);
+
   return (
     <>
+      {/* ---- INTRO: name + progress bar on a clean screen ---- */}
+      <AnimatePresence>
+        {phase === "intro" && (
+          <motion.div
+            className={styles.introOverlay}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease }}
+          >
+            <div className={styles.introContent}>
+              {/* Name at ~80vh */}
+              <div className={styles.introName}>
+                <AnimatedName text="Yash" className={styles.introNameFirst} delay={0.2} />
+                <AnimatedName text="Sonwaney" className={styles.introNameLast} delay={0.4} />
+              </div>
+
+              {/* Progress bar */}
+              <div className={styles.progressTrack}>
+                <motion.div
+                  className={styles.progressBar}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ---- MAIN HERO: revealed after intro ---- */}
       <section className={styles.hero}>
         {/* Geometric arc */}
         <motion.div
           className={styles.geometricArc}
           initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          animate={phase === "reveal" ? { scale: 1, opacity: 0.4 } : {}}
           transition={{ duration: 1.5, ease }}
         />
 
@@ -54,8 +101,8 @@ export default function Hero() {
           <motion.span
             className={styles.roleLabel}
             initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease, delay: 0.6 }}
+            animate={phase === "reveal" ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease, delay: 0.2 }}
           >
             Product Designer & Strategist
           </motion.span>
@@ -63,8 +110,8 @@ export default function Hero() {
           <motion.h1
             className={styles.headline}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.7 }}
+            animate={phase === "reveal" ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease, delay: 0.35 }}
           >
             I design enterprise tools and AI-native
             workflows that feel simple on the surface
@@ -74,8 +121,8 @@ export default function Hero() {
           <motion.div
             className={styles.belowHeadline}
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.9 }}
+            animate={phase === "reveal" ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease, delay: 0.5 }}
           >
             <p className={styles.bio}>
               7+ years at HP, Accenture, and Parsons — bridging research,
@@ -97,15 +144,20 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Bottom: massive name, centered */}
-        <div className={styles.nameBlock}>
+        {/* Bottom: massive name watermark */}
+        <motion.div
+          className={styles.nameBlock}
+          initial={{ opacity: 0 }}
+          animate={phase === "reveal" ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, ease, delay: 0.6 }}
+        >
           <Container>
             <div className={styles.nameInner}>
-              <AnimatedName text="Yash" className={styles.nameFirst} delay={0.3} />
-              <AnimatedName text="Sonwaney" className={styles.nameLast} delay={0.5} />
+              <span className={styles.nameFirst}>Yash</span>
+              <span className={styles.nameLast}>Sonwaney</span>
             </div>
           </Container>
-        </div>
+        </motion.div>
       </section>
 
       {/* Experience strip with logos */}
