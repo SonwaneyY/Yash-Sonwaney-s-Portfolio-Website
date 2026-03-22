@@ -2,21 +2,57 @@
   padding: var(--space-12) 0;
 }
 
-.header {
-  font-family: var(--font-serif);
-  font-size: 28px;
-  font-weight: 400;
-  color: var(--text-primary);
+/* ---- Category tab bar ---- */
+.tabBar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
   margin-bottom: var(--space-8);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-@media (min-width: 768px) {
-  .header {
-    font-size: 32px;
-  }
+.tabBar::-webkit-scrollbar {
+  display: none;
 }
 
-/* Asymmetric grid — 12 column system */
+.tab,
+.tabActive {
+  all: unset;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  padding-bottom: 12px;
+  transition: color 200ms ease;
+}
+
+.tab {
+  color: var(--text-tertiary);
+}
+
+.tab:hover {
+  color: var(--text-secondary);
+}
+
+.tabActive {
+  color: var(--accent);
+}
+
+/* Sliding underline indicator */
+.tabIndicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 1px;
+}
+
+/* ---- Project grid ---- */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -49,6 +85,7 @@
   .grid > *:nth-child(6) { grid-column: 8 / 13; }
 }
 
+/* ---- View all link ---- */
 .viewAll {
   display: inline-block;
   margin-top: var(--space-6);

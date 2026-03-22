@@ -1,35 +1,87 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import TextReveal from "@/components/ui/TextReveal";
 import ProjectCard from "./ProjectCard";
-import { projects } from "@/lib/data";
-import { staggerContainerWide, fadeInUp, viewportOnce } from "@/lib/animations";
+import { projects, projectCategories, type ProjectCategory } from "@/lib/data";
 import styles from "./FeaturedWork.module.css";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function FeaturedWork() {
+  const [active, setActive] = useState<ProjectCategory>("All");
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  const filtered =
+    active === "All"
+      ? projects
+      : projects.filter((p) => p.filterCategory === active);
+
+  // Update underline indicator position
+  useEffect(() => {
+    if (!tabsRef.current) return;
+    const activeTab = tabsRef.current.querySelector(
+      `[data-active="true"]`
+    ) as HTMLButtonElement | null;
+    if (activeTab) {
+      const parentRect = tabsRef.current.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      setIndicatorStyle({
+        left: tabRect.left - parentRect.left,
+        width: tabRect.width,
+      });
+    }
+  }, [active]);
+
   return (
     <section id="work" className={styles.section}>
       <Container>
-        <TextReveal className={styles.header} as="h2">
-          Selected work
-        </TextReveal>
-
-        <motion.div
-          className={styles.grid}
-          variants={staggerContainerWide}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          {projects.map((project) => (
-            <motion.div key={project.slug} variants={fadeInUp}>
-              <ProjectCard {...project} />
-            </motion.div>
+        {/* Category tabs */}
+        <div className={styles.tabBar} ref={tabsRef} role="tablist">
+          {projectCategories.map((cat) => (
+            <button
+              key={cat}
+              role="tab"
+              aria-selected={active === cat}
+              data-active={active === cat}
+              className={active === cat ? styles.tabActive : styles.tab}
+              onClick={() => setActive(cat)}
+            >
+              {cat}
+            </button>
           ))}
-        </motion.div>
+          <motion.div
+            className={styles.tabIndicator}
+            animate={indicatorStyle}
+            transition={{ duration: 0.35, ease }}
+          />
+        </div>
+
+        {/* Project grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className={styles.grid}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.25, ease }}
+          >
+            {filtered.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease, delay: i * 0.05 }}
+              >
+                <ProjectCard {...project} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         <Link href="/work" className={styles.viewAll}>
           View all work &rarr;
