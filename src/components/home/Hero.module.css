@@ -1,0 +1,263 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ---- Geometric arc ---- */
+.geometricArc {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 800px;
+  max-height: 800px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   CENTER CONTENT — headline, bio, CTAs
+   Vertically and horizontally centered
+   ============================================ */
+.centerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.roleLabel {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 780px;
+  margin-bottom: var(--space-4);
+}
+
+.belowHeadline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.bio {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+  text-align: center;
+}
+
+/* ---- CTAs ---- */
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bg-primary);
+  background-color: var(--text-primary);
+  padding: 14px 32px;
+  border-radius: 9999px;
+  transition: background-color 300ms ease, transform 200ms ease;
+}
+
+.ctaPrimary:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.ctaPrimary svg {
+  transition: transform 200ms ease;
+}
+
+.ctaPrimary:hover svg {
+  transform: translateX(3px);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 14px 32px;
+  border-radius: 9999px;
+  border: 1px solid var(--text-tertiary);
+  transition: border-color 300ms ease, color 300ms ease, transform 200ms ease;
+}
+
+.ctaSecondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   NAME BLOCK — centered, pinned to bottom
+   ============================================ */
+.nameBlock {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.nameInner {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 24px);
+  white-space: nowrap;
+}
+
+.nameFirst {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 10vw, 140px);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  display: block;
+  opacity: 0.08;
+}
+
+.nameLast {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 10vw, 140px);
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  display: block;
+  opacity: 0.12;
+}
+
+/* ============================================
+   EXPERIENCE STRIP — with logos
+   ============================================ */
+.experienceStrip {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.experienceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .experienceGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+.experienceItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .experienceItem {
+    padding-right: var(--space-3);
+    border-right: 1px solid var(--border);
+  }
+
+  .experienceItem:last-child {
+    border-right: none;
+  }
+}
+
+/* Logo container */
+.experienceLogo {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logoImg {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.experienceText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.experienceCompany {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.experienceRole {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.experienceYear {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}

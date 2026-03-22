@@ -1,0 +1,44 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--space-3);
+  right: 20px;
+  padding: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-tertiary);
+  transition: color 200ms ease;
+}
+
+.closeButton:hover {
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.navLink {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text-primary);
+  transition: color 200ms ease;
+}
+
+.navLink:hover {
+  color: var(--accent);
+}

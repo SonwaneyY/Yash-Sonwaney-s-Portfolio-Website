@@ -1,0 +1,64 @@
+.section {
+  padding: var(--space-12) 0;
+  background-color: var(--bg-secondary);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 240px;
+  position: relative;
+}
+
+.quoteWrapper {
+  max-width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .quote {
+    font-size: 22px;
+  }
+}
+
+.attribution {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: var(--space-3);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-5);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border);
+  transition: background-color 300ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.dotActive {
+  background-color: var(--accent);
+}

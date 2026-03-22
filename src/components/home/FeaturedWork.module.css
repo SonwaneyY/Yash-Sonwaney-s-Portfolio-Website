@@ -1,0 +1,77 @@
+.section {
+  padding: var(--space-12) 0;
+}
+
+.header {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .header {
+    font-size: 32px;
+  }
+}
+
+/* Asymmetric grid — 12 column system */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-3);
+  }
+
+  /* Row 1: large + small */
+  .grid > *:nth-child(1) { grid-column: 1 / 8; }
+  .grid > *:nth-child(2) { grid-column: 8 / 13; }
+
+  /* Row 2: small + large */
+  .grid > *:nth-child(3) { grid-column: 1 / 6; }
+  .grid > *:nth-child(4) { grid-column: 6 / 13; }
+
+  /* Row 3: large + small */
+  .grid > *:nth-child(5) { grid-column: 1 / 8; }
+  .grid > *:nth-child(6) { grid-column: 8 / 13; }
+}
+
+.viewAll {
+  display: inline-block;
+  margin-top: var(--space-6);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--accent);
+  position: relative;
+  transition: opacity 200ms ease;
+}
+
+.viewAll::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.viewAll:hover::after {
+  transform: scaleX(1);
+}
