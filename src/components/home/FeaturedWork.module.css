@@ -83,6 +83,13 @@
   /* Row 3: large + small */
   .grid > *:nth-child(5) { grid-column: 1 / 8; }
   .grid > *:nth-child(6) { grid-column: 8 / 13; }
+
+  /* Row 4: small + large */
+  .grid > *:nth-child(7) { grid-column: 1 / 6; }
+  .grid > *:nth-child(8) { grid-column: 6 / 13; }
+
+  /* Row 5: full width */
+  .grid > *:nth-child(9) { grid-column: 1 / 8; }
 }
 
 /* ---- View all link ---- */

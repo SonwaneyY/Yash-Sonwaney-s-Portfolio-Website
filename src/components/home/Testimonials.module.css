@@ -3,12 +3,29 @@
   background-color: var(--bg-secondary);
 }
 
+/* Hidden measurer to calculate tallest testimonial */
+.measurer {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: 100%;
+  max-width: 640px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 240px;
   position: relative;
+}
+
+.quoteArea {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
 }
 
 .quoteWrapper {

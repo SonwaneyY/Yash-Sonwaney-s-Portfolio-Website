@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import styles from "./ProjectCard.module.css";
@@ -10,9 +11,14 @@ interface ProjectCardProps {
   title: string;
   subtitle: string;
   category: string;
-  company: string;
-  year: string;
-  imagePlaceholder: string;
+  company?: string;
+  year?: string;
+  coverImage: string;
+  imageConfig?: {
+    fit: "cover" | "contain";
+    position: string;
+    bg?: string;
+  };
 }
 
 // Clip-path reveal: image wipes in from bottom
@@ -34,7 +40,8 @@ export default function ProjectCard({
   category,
   company,
   year,
-  imagePlaceholder,
+  coverImage,
+  imageConfig = { fit: "cover", position: "center center" },
 }: ProjectCardProps) {
   const ref = useRef<HTMLAnchorElement>(null);
   const { scrollYProgress } = useScroll({
@@ -42,8 +49,8 @@ export default function ProjectCard({
     offset: ["start end", "end start"],
   });
 
-  // Subtle parallax on the image placeholder
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  // Subtle parallax on the image
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-3%", "3%"]);
 
   return (
     <Link href={`/work/${slug}`} className={styles.card} ref={ref}>
@@ -53,21 +60,34 @@ export default function ProjectCard({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-5%" }}
+        style={imageConfig.bg ? { backgroundColor: imageConfig.bg } : undefined}
       >
         <motion.div
           className={styles.imageInner}
           style={{ y: imageY }}
         >
-          <span className={styles.imagePlaceholder}>{imagePlaceholder}</span>
+          <Image
+            src={coverImage}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+            className={styles.coverImage}
+            style={{
+              objectFit: imageConfig.fit,
+              objectPosition: imageConfig.position,
+            }}
+          />
         </motion.div>
       </motion.div>
       <div className={styles.content}>
         <span className={styles.category}>{category}</span>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.subtitle}>{subtitle}</p>
-        <span className={styles.meta}>
-          {company} &middot; {year}
-        </span>
+        {(company || year) && (
+          <span className={styles.meta}>
+            {[company, year].filter(Boolean).join(" · ")}
+          </span>
+        )}
       </div>
     </Link>
   );

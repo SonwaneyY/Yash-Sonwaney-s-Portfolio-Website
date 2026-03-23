@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import ProjectCard from "./ProjectCard";
@@ -10,10 +11,42 @@ import styles from "./FeaturedWork.module.css";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+/** Maps URL slug → category name */
+const slugToCategory: Record<string, ProjectCategory> = {
+  "product-design": "Product Design",
+  "strategy": "Strategy",
+  "research": "Research",
+};
+
 export default function FeaturedWork() {
-  const [active, setActive] = useState<ProjectCategory>("All");
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
+  const initialCategory: ProjectCategory =
+    (categoryParam && slugToCategory[categoryParam]) || "All";
+
+  const [active, setActive] = useState<ProjectCategory>(initialCategory);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Sync with URL param changes
+  useEffect(() => {
+    if (categoryParam && slugToCategory[categoryParam]) {
+      setActive(slugToCategory[categoryParam]);
+    }
+  }, [categoryParam]);
+
+  // Auto-scroll to work section when arriving via category link
+  useEffect(() => {
+    if (categoryParam && slugToCategory[categoryParam] && sectionRef.current) {
+      // Small delay to let intro animation finish
+      const timer = setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 3200);
+      return () => clearTimeout(timer);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered =
     active === "All"
@@ -37,7 +70,7 @@ export default function FeaturedWork() {
   }, [active]);
 
   return (
-    <section id="work" className={styles.section}>
+    <section id="work" ref={sectionRef} className={styles.section}>
       <Container>
         {/* Category tabs */}
         <div className={styles.tabBar} ref={tabsRef} role="tablist">
