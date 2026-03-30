@@ -111,5 +111,6 @@ export const heroSequence = {
 // Viewport settings for whileInView
 export const viewportOnce = {
   once: true,
-  margin: "-10%" as const,
+  margin: "0px" as const,
+  amount: 0.05,
 };
