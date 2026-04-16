@@ -1,4 +1,26 @@
 /* ============================================
+   WAVE EMOJI
+   ============================================ */
+.wave {
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1;
+  vertical-align: middle;
+  transform-origin: 70% 80%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(18deg); }
+  30%  { transform: rotate(-8deg); }
+  45%  { transform: rotate(16deg); }
+  60%  { transform: rotate(-4deg); }
+  75%  { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ============================================
    INTRO OVERLAY — covers all content during loading
    ============================================ */
 .introOverlay {
@@ -42,8 +64,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: space-between;
+  padding-top: 14vh;
+  padding-bottom: max(80px, 10vh);
+  overflow-x: clip;
 }
 
 /* ---- Geometric arc ---- */
@@ -63,17 +87,15 @@
 }
 
 /* ============================================
-   CENTER CONTENT — headline, bio, CTAs
+   TOP CONTENT — headline + subheadline, near header
    ============================================ */
-.centerContent {
+.topContent {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0 var(--space-3);
-  margin-bottom: var(--space-6);
+  align-items: flex-start;
+  text-align: left;
 }
 
 .roleLabel {
@@ -95,13 +117,23 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   max-width: 780px;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.subheadline {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  max-width: 720px;
 }
 
 .belowHeadline {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-3);
 }
 
@@ -111,7 +143,7 @@
   color: var(--text-secondary);
   line-height: 1.7;
   max-width: 520px;
-  text-align: center;
+  text-align: left;
 }
 
 /* ---- CTAs ---- */
@@ -121,7 +153,7 @@
   gap: var(--space-2);
   margin-top: var(--space-1);
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .ctaPrimary {
@@ -171,53 +203,50 @@
 }
 
 /* ============================================
-   NAME BLOCK — centered, pinned to bottom
+   TICKER SECTION — wrapper for bottom group
    ============================================ */
-.nameBlock {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 95;
-  pointer-events: none;
+.tickerSection {
+  width: 100%;
+}
+
+/* Mobile: pin to viewport bottom so it's always visible */
+@media (max-width: 767px) {
+  .tickerSection {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: var(--bg-primary);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Spacer so hero content isn't hidden behind the fixed bar */
+  .hero {
+    padding-bottom: 100px;
+  }
+}
+
+/* ============================================
+   TICKER BLOCK — label + ticker band
+   ============================================ */
+.tickerBlock {
+  width: 100%;
+  max-width: 720px;
   overflow: hidden;
-  padding-bottom: var(--space-2);
 }
 
-/* After reveal, drop z-index so it doesn't cover scrolled content */
-.nameBlockRevealed {
-  z-index: 1;
-}
-
-.nameInner {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: clamp(12px, 2vw, 24px);
-  white-space: nowrap;
-}
-
-.nameFirst {
-  font-family: var(--font-serif);
-  font-size: clamp(48px, 10vw, 140px);
-  font-weight: 400;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  line-height: 0.85;
+.tickerLabel {
   display: block;
-  transition: opacity 0.8s ease;
-}
-
-.nameLast {
-  font-family: var(--font-serif);
-  font-size: clamp(48px, 10vw, 140px);
-  font-weight: 400;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--text-primary);
-  letter-spacing: -0.03em;
-  line-height: 0.85;
-  display: block;
-  transition: opacity 0.8s ease;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-2);
+  margin-bottom: var(--space-2);
 }
 
 /* ============================================

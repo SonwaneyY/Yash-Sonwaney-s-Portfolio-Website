@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Container from "@/components/ui/Container";
 import MobileMenu from "./MobileMenu";
-import ThemeToggle from "@/components/ui/ThemeToggle";
+
 import { siteConfig } from "@/lib/data";
 import styles from "./Header.module.css";
 
@@ -52,7 +52,6 @@ export default function Header() {
                   </Link>
                 )
               )}
-              <ThemeToggle />
             </nav>
 
             <button

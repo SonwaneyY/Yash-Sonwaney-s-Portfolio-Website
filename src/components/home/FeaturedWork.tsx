@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/ui/Container";
@@ -17,6 +17,7 @@ const slugToCategory: Record<string, ProjectCategory> = {
   "research": "Research",
 };
 
+
 export default function FeaturedWork() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
@@ -25,9 +26,6 @@ export default function FeaturedWork() {
     (categoryParam && slugToCategory[categoryParam]) || "All";
 
   const [active, setActive] = useState<ProjectCategory>(initialCategory);
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
 
   // Sync with URL param changes
   useEffect(() => {
@@ -38,12 +36,12 @@ export default function FeaturedWork() {
 
   // Auto-scroll to work section when arriving via category link
   useEffect(() => {
-    if (categoryParam && slugToCategory[categoryParam] && sectionRef.current) {
-      // Small delay to let intro animation finish
-      const timer = setTimeout(() => {
-        sectionRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 3200);
-      return () => clearTimeout(timer);
+    if (categoryParam && slugToCategory[categoryParam]) {
+      const el = document.getElementById("work");
+      if (el) {
+        const timer = setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 3200);
+        return () => clearTimeout(timer);
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -52,44 +50,36 @@ export default function FeaturedWork() {
       ? projects
       : projects.filter((p) => p.filterCategory === active);
 
-  // Update underline indicator position
-  useEffect(() => {
-    if (!tabsRef.current) return;
-    const activeTab = tabsRef.current.querySelector(
-      `[data-active="true"]`
-    ) as HTMLButtonElement | null;
-    if (activeTab) {
-      const parentRect = tabsRef.current.getBoundingClientRect();
-      const tabRect = activeTab.getBoundingClientRect();
-      setIndicatorStyle({
-        left: tabRect.left - parentRect.left,
-        width: tabRect.width,
-      });
-    }
-  }, [active]);
+  /** Count per category */
+  const countFor = (cat: ProjectCategory) =>
+    cat === "All"
+      ? projects.length
+      : projects.filter((p) => p.filterCategory === cat).length;
 
   return (
-    <section id="work" ref={sectionRef} className={styles.section}>
+    <section id="work" className={styles.section}>
       <Container>
-        {/* Category tabs */}
-        <div className={styles.tabBar} ref={tabsRef} role="tablist">
-          {projectCategories.map((cat) => (
-            <button
-              key={cat}
-              role="tab"
-              aria-selected={active === cat}
-              data-active={active === cat}
-              className={active === cat ? styles.tabActive : styles.tab}
-              onClick={() => setActive(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-          <motion.div
-            className={styles.tabIndicator}
-            animate={indicatorStyle}
-            transition={{ duration: 0.35, ease }}
-          />
+        {/* Header */}
+        <p className={styles.filterLabel}>What are you looking for?</p>
+
+        {/* Category pills */}
+        <div className={styles.tabBar} role="tablist">
+          {projectCategories.map((cat) => {
+            const isActive = active === cat;
+            return (
+              <button
+                key={cat}
+                role="tab"
+                aria-selected={isActive}
+                className={styles.pill}
+                data-active={isActive}
+                data-category={cat}
+                onClick={() => setActive(cat)}
+              >
+                {cat} ({countFor(cat)})
+              </button>
+            );
+          })}
         </div>
 
         {/* Project grid */}

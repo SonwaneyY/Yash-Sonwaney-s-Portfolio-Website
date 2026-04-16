@@ -37,48 +37,6 @@
   color-scheme: light;
 }
 
-/* ============================================
-   DARK MODE
-   ============================================ */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #141413;
-    --bg-secondary: #1E1D1B;
-    --bg-tertiary: #2A2926;
-    --text-primary: #E8E6E1;
-    --text-secondary: #9C9A92;
-    --text-tertiary: #6B6960;
-    --accent: #D4725A;
-    --border: #2E2D2A;
-    color-scheme: dark;
-  }
-}
-
-/* Manual toggle support */
-[data-theme="dark"] {
-  --bg-primary: #141413;
-  --bg-secondary: #1E1D1B;
-  --bg-tertiary: #2A2926;
-  --text-primary: #E8E6E1;
-  --text-secondary: #9C9A92;
-  --text-tertiary: #6B6960;
-  --accent: #D4725A;
-  --border: #2E2D2A;
-  color-scheme: dark;
-}
-
-[data-theme="light"] {
-  --bg-primary: #FAFAF7;
-  --bg-secondary: #F2F0EB;
-  --bg-tertiary: #E8E5DE;
-  --text-primary: #1A1A18;
-  --text-secondary: #6B6960;
-  --text-tertiary: #A09E96;
-  --accent: #C25B3A;
-  --border: #E0DED8;
-  color-scheme: light;
-}
 
 /* ============================================
    RESET

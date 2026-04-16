@@ -1,35 +1,45 @@
 "use client";
 
 import styles from "./Ticker.module.css";
-import { testimonials } from "@/lib/data";
 
-function Dot() {
-  return <span className={styles.dot} aria-hidden="true" />;
-}
+const keywords = [
+  "DESIGN RESEARCH",
+  "BUSINESS STRATEGY",
+  "STRATEGIC DESIGN",
+  "PRODUCT DESIGN",
+  "UX DESIGN",
+  "USER TESTING",
+];
 
-function TickerItems() {
+// 6 copies ensures the strip is wider than any viewport (incl. 5K displays)
+// so translateX(-100%/6) = exactly one set's width — a perfect seamless loop
+const COPIES = 6;
+
+function TickerSet({ hidden }: { hidden?: boolean }) {
   return (
     <>
-      {testimonials.map((t, i) => (
-        <span key={i} className={styles.item}>
-          <span className={styles.quote}>"{t.quote}"</span>
+      {keywords.map((keyword, i) => (
+        <span
+          key={i}
+          className={styles.item}
+          aria-hidden={hidden || undefined}
+        >
+          <span className={styles.keyword}>{keyword}</span>
+          <span className={styles.dot} aria-hidden="true">·</span>
         </span>
       ))}
-      <Dot />
     </>
   );
 }
 
 export default function Ticker() {
   return (
-    <div className={styles.ticker} aria-label="Testimonials">
-      <div className={styles.track}>
-        <div className={styles.inner}>
-          <TickerItems />
-        </div>
-        <div className={styles.inner} aria-hidden="true">
-          <TickerItems />
-        </div>
+    <div className={styles.ticker} aria-label="Capabilities">
+      <div className={styles.inner}>
+        <TickerSet />
+        {Array.from({ length: COPIES - 1 }).map((_, i) => (
+          <TickerSet key={i} hidden />
+        ))}
       </div>
     </div>
   );

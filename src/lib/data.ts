@@ -733,36 +733,188 @@ export const projects = [
   },
   {
     slug: "beyond-efficiency",
-    title: "Beyond Efficiency",
-    subtitle: "Research aimed to understand the shifting dynamics of tech hiring shaped by automation, AI, and technology.",
-    category: "STRATEGY · USER RESEARCH",
+    title: "Beyond Efficiency: Understanding the Paradox of AI in Hiring",
+    subtitle: "A design research capstone investigating how automation and AI have created a paradox — employers drown in high-volume, low-relevance applications while qualified candidates are systematically excluded.",
+    category: "DESIGN RESEARCH",
     filterCategory: "Research" as ProjectCategory,
     coverImage: "/covers/beyond-efficiency.png",
     imageConfig: { fit: "cover" as const, position: "center 75%" },
     caseStudy: {
-      role: "Lead Researcher",
-      timeline: "Sep — Dec 2024",
-      tools: ["Interview Protocols", "Thematic Analysis", "Miro", "Figma"],
-      team: "3 researchers",
+      role: "Lead Researcher & Designer",
+      timeline: "Fall 2025",
+      tools: ["DARN Framework", "Focus Groups", "Employer Interviews", "Candidate Surveys", "Thematic Analysis", "Figma"],
+      team: "Yash Sonwaney & Ananya (Parsons Design Research Capstone)",
       sections: [
         {
           type: "text" as const,
-          heading: "Overview",
+          heading: "The Paradox of Efficiency",
           body: [
-            "Beyond Efficiency is a qualitative research project exploring how automation, AI, and platform economics are reshaping the hiring landscape in tech. We interviewed hiring managers, recruiters, and candidates to understand the shifting power dynamics and emerging friction points.",
-            "The research surfaced a central tension: companies are using AI to optimize hiring speed while candidates increasingly feel dehumanized by the process. The gap between efficiency and experience is widening, and neither side is satisfied.",
+            "Tech hiring promised to get better with AI. Instead, it created a paradox. Employers face an overwhelming flood of applications — many AI-generated — and can't identify the right candidates. Candidates submit hundreds of applications into black-box systems and hear nothing back. Both sides are more frustrated than ever, even as the tools supposedly optimizing the process multiply.",
+            "This research project set out to understand that contradiction. Using a multi-method approach, we mapped the hiring ecosystem from both sides — candidate and employer — to identify where the system breaks down, who bears the cost, and how design might intervene.",
           ],
         },
         {
-          type: "quote" as const,
-          text: "Efficiency without empathy creates systems that work perfectly for no one.",
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/hypothesis.png",
+          alt: "Research hypothesis: the paradox of efficiency in AI-driven hiring",
+          caption: "The central hypothesis — automation creates high volume but low relevance for employers, while qualified candidates are filtered out.",
+        },
+        {
+          type: "metrics" as const,
+          items: [
+            { value: "92%", label: "Of candidates don't trust AI to be fair in hiring" },
+            { value: "61%", label: "Of candidates are ghosted even after an interview" },
+            { value: "30–50%", label: "Increase in applications in 24 months due to AI-generated resumes" },
+            { value: "53%", label: "Of recruiters report burnout from high volumes of low-quality applications" },
+            { value: "$180K", label: "Average cost of a bad hire for a mid-level tech role" },
+          ],
         },
         {
           type: "text" as const,
-          heading: "Outcome",
+          heading: "Research Questions",
           body: [
-            "The research findings were synthesized into a framework for human-centered hiring design and presented at a Parsons research showcase. Key insights informed the design direction for the Loop project.",
+            "Three questions oriented our inquiry. First: how has AI reshaped hiring, and where do inequities emerge for both candidates and employers? Second: how have AI hiring tools changed how recruiters and hiring managers actually work and make decisions — day to day, not in the abstract? Third: how are candidates adapting to the opacity, ghosting, and systemic inequities baked into modern hiring?",
+            "These questions were deliberately held together rather than treated separately. The hiring system is relational — understanding the candidate experience required understanding the recruiter experience, and vice versa.",
           ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/research-questions.png",
+          alt: "Three research questions guiding the inquiry",
+          caption: "Our three research questions — held together as a relational system, not separate tracks.",
+        },
+        {
+          type: "text" as const,
+          heading: "Research Methods",
+          body: [
+            "We used a mixed-methods approach combining primary and secondary research. On the primary side: in-depth interviews with recruiters and hiring managers, a candidate survey with 51 responses, and focus group discussions with candidates navigating active job searches.",
+            "Secondary research included a literature review of bias and automation research, social media scans of communities where candidates discuss hiring tactics (Reddit, Blind, LinkedIn), and industry market reports from Greenhouse, Joveo, and The Planet Group.",
+            "To map the system as a whole, we applied the D-A-R-N framework — Devices, Actors, Representations, Networks — a strategic design method that surfaces the material and social infrastructure underpinning a market. This helped us see how ATS platforms, AI scoring algorithms, LinkedIn Recruiter, candidate resumes, and job descriptions interact as a system, not just as individual tools.",
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            {
+              src: "/case-studies/beyond-efficiency/research-methods.png",
+              alt: "Primary and secondary research methods overview",
+              caption: "Mixed-method approach: employer interviews, 51-response candidate survey, focus groups, literature review.",
+            },
+            {
+              src: "/case-studies/beyond-efficiency/darn-map.png",
+              alt: "D-A-R-N system map of the hiring ecosystem",
+              caption: "The D-A-R-N map — Devices, Actors, Representations, Networks — surfacing the hiring system's full infrastructure.",
+            },
+          ],
+        },
+        {
+          type: "text" as const,
+          heading: "The ATS Pipeline & Where AI Enters",
+          body: [
+            "Most candidates interact with a 7-stage hiring pipeline: job posting, resume submission, AI-powered skill extraction, machine learning ranking by fit score, recruiter review and shortlisting, interview coordination, and final decision. AI is most densely concentrated in stages 3 and 4 — extracting qualifications and ranking candidates before any human sees the application.",
+            "What looks like a clean pipeline obscures the reality: recruiters told us that most of their work is still manual, concentrated at the stages where AI is supposed to help most. One recruiter described spending an entire week on a single role that received over a thousand applications. The AI had filtered — but the shortlist it produced still required significant human judgment to evaluate.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/ats-workflow.png",
+          alt: "7-stage ATS workflow showing where AI is densely integrated, integrated, or only assisting",
+          caption: "The 7-stage ATS pipeline — stages 3 and 4 have the densest AI involvement, yet recruiters report those stages still demand heavy manual effort.",
+        },
+        {
+          type: "quote" as const,
+          text: "It's not the rejection that hurts — it's sitting in that grey area, not knowing if any human ever even saw my application.",
+          attribution: "Candidate, Focus Group Discussion",
+        },
+        {
+          type: "text" as const,
+          heading: "What Candidates Are Experiencing",
+          body: [
+            "Candidates described a hiring process defined by opacity and asymmetry. Applications disappear into ATS systems with no feedback. The rise of AI-generated resumes has made keyword optimization feel mandatory, pushing candidates to game systems rather than communicate their actual experience. 61% reported being ghosted after completing an interview — a stage where candidates have already invested significant time and emotional energy.",
+            "The 92% distrust figure for AI fairness wasn't cynicism — it reflected lived experience. Candidates who optimized their resumes by mirroring job description language reported better response rates, regardless of underlying fit. The system rewards pattern-matching over capability, and candidates know it.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/candidate-journey.png",
+          alt: "Candidate journey map showing emotional states from awareness through offer stage",
+          caption: "The candidate journey — moving from overwhelmed and unsure at awareness, to strained during preparation, to guarded hope through screening, with relief only at offer.",
+        },
+        {
+          type: "quote" as const,
+          text: "Recruitment is still very manual. One role had over a thousand applications and I spent an entire week just going through them.",
+          attribution: "Recruiter P002, Employer Interview",
+        },
+        {
+          type: "text" as const,
+          heading: "What Employers Are Experiencing",
+          body: [
+            "Recruiters and hiring managers described being overwhelmed, not empowered. AI hiring tools have increased application volume dramatically but haven't solved the quality problem. 53% of recruiters reported burnout from reviewing high volumes of low-quality, often AI-generated applications.",
+            "A new category of problem emerged: fraud. 17% of hiring managers reported interviewing a deepfake candidate — a sign that AI-generated applications are no longer just keyword-stuffed resumes but increasingly fabricated identities. The most consistent AI use case recruiters actually valued wasn't ranking or scoring — it was detecting fake profiles at the top of the funnel.",
+            "The best candidates, multiple recruiters noted, still come from outbound sourcing via LinkedIn Recruiter — a manual process. The tools meant to automate inbound hiring haven't replaced the human judgment required to identify genuine fit.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/employer-journey.png",
+          alt: "Employer journey map showing emotional states from awareness through decision-making",
+          caption: "The employer journey — alert at job posting, hopeful at inflow, then overloaded, stressed, and cautious as volume overwhelms the process.",
+        },
+        {
+          type: "text" as const,
+          heading: "Candidate Needs",
+          body: [
+            "Synthesis across survey responses and focus group sessions identified four core needs. First, trust through fair evaluation — candidates want to know the criteria for assessment and that those criteria apply consistently regardless of identity markers. Second, closure over silence — rejection is acceptable; disappearing without response is not. Third, protection from burnout — the process of applying to dozens of roles weekly, reformatting materials per ATS, and managing uncertainty is exhausting. Fourth, agency in a system that feels rigged — candidates want the process to feel like a two-way assessment, not an opaque filter.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/candidate-needs.png",
+          alt: "Four synthesized candidate needs: Trust, Closure, Protection from Burnout, Restored Agency",
+          caption: "Four candidate needs synthesized from surveys and focus groups — trust, closure, burnout protection, and restored agency.",
+        },
+        {
+          type: "text" as const,
+          heading: "Employer Needs",
+          body: [
+            "Employers surfaced four parallel needs. First, identifying authentic candidates — separating real, qualified humans from AI-generated applications has become a primary concern. Second, managing application volume — the volume problem isn't solved by existing AI tools; it has been created, in part, by them. Third, closing communication gaps — ghosting persists not because recruiters are indifferent but because the process is so manual that communication falls through. Fourth, technology as a cognitive offloader — recruiters want AI to handle the mechanical parts of the process so they can invest judgment in evaluation and relationship-building.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/employer-needs.png",
+          alt: "Four synthesized employer needs: Authentic Candidates, Volume Management, Communication Gaps, Cognitive Offloading",
+          caption: "Four employer needs synthesized from recruiter and hiring manager interviews — authenticity, volume, communication, and cognitive offloading.",
+        },
+        {
+          type: "text" as const,
+          heading: "Opportunity & Direction",
+          body: [
+            "The research converged on a single reframe: the opportunity isn't to make hiring faster, it's to make it more legible for everyone involved. The question we carried into concept development was: how might we rebalance AI in tech hiring to reduce recruiter overload while making qualified candidates more visible?",
+            "The theory of change we developed positioned technology as a cognitive offloader — handling mechanical tasks so humans can focus on what requires judgment. In practice, this means less manual processing of applications leads to deeper evaluation of fit, which enables more consistent candidate communication, which attracts more engaged and higher-quality candidates. It's a compounding loop, not a one-time fix.",
+            "Our first concept direction was Loop: an AI candidate communication agent that keeps every candidate informed without recruiters having to send a single email themselves. Loop addresses the most emotionally costly part of the hiring process — ghosting — while freeing recruiter bandwidth for higher-value work. Prototyping and testing is underway in Spring 2026.",
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            {
+              src: "/case-studies/beyond-efficiency/opportunity-statement.png",
+              alt: "How might we rebalance AI in tech hiring",
+              caption: "The opportunity statement reframing the challenge from speed to legibility.",
+            },
+            {
+              src: "/case-studies/beyond-efficiency/theory-of-change.png",
+              alt: "Theory of change: technology as cognitive offloader leading to better hiring outcomes",
+              caption: "The theory of change — cognitive offloading cascades into deeper evaluation, consistent communication, and better candidate quality.",
+            },
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/loop-concept.png",
+          alt: "Loop: Candidate Communication Agent concept — keeping every candidate in the loop without sending a single email",
+          caption: "Concept I: Loop — an AI communication agent that eliminates ghosting by keeping every candidate informed, automatically.",
         },
       ],
     },

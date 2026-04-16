@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Ticker from "@/components/home/Ticker";
 import Container from "@/components/ui/Container";
-import { siteConfig } from "@/lib/data";
 import styles from "./Hero.module.css";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -11,12 +11,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Hero() {
   const [phase, setPhase] = useState<"intro" | "reveal">("intro");
 
-  // Scroll-based name fade out
-  const { scrollY } = useScroll();
-  const nameOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-
   useEffect(() => {
-    // Lock scroll during intro
     document.body.style.overflow = "hidden";
     document.body.classList.add("intro-active");
 
@@ -36,7 +31,7 @@ export default function Hero() {
 
   return (
     <>
-      {/* ---- FULL-SCREEN OVERLAY — covers everything during intro ---- */}
+      {/* ---- FULL-SCREEN OVERLAY ---- */}
       <AnimatePresence>
         {!isReveal && (
           <motion.div
@@ -44,9 +39,7 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease }}
           >
-            {/* Role label — above progress bar */}
             <div className={styles.introCenter}>
-              {/* Progress bar */}
               <motion.div
                 className={styles.progressWrapper}
                 initial={{ y: 20, opacity: 0 }}
@@ -77,85 +70,44 @@ export default function Hero() {
           transition={{ duration: 1.5, ease }}
         />
 
-        {/* Center content — only visible after reveal */}
-        <div className={styles.centerContent}>
-          <motion.span
-            className={styles.roleLabel}
-            initial={{ opacity: 0, y: 12 }}
-            animate={isReveal ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease, delay: 0.2 }}
-          >
-            Product Designer & Strategist
-          </motion.span>
+        {/* Top group — close to the header */}
+        <Container>
+          <div className={styles.topContent}>
+            <motion.h1
+              className={styles.headline}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isReveal ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease, delay: 0.35 }}
+            >
+              Hi I&rsquo;m Yash <span className={styles.wave}>👋</span>
+            </motion.h1>
 
-          <motion.h1
-            className={styles.headline}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isReveal ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease, delay: 0.35 }}
-          >
-            I design enterprise tools and AI-native
-            workflows that feel simple on the surface
-            — and smart underneath.
-          </motion.h1>
+            <motion.p
+              className={styles.subheadline}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isReveal ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease, delay: 0.5 }}
+            >
+              a Strategic Design Generalist bridging the gap between business strategy and user needs operating between systems-level innovation, competitive advantage, and emerging tech solutions.
+            </motion.p>
+          </div>
+        </Container>
 
-          <motion.div
-            className={styles.belowHeadline}
-            initial={{ opacity: 0, y: 16 }}
-            animate={isReveal ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease, delay: 0.5 }}
-          >
-            <p className={styles.bio}>
-              7+ years at HP, Accenture, and Parsons — bridging research,
-              strategy, and craft. Currently exploring how AI reshapes the
-              way we design and decide.
-            </p>
-
-            <div className={styles.ctaGroup}>
-              <a href="#work" className={styles.ctaPrimary}>
-                <span>See my work</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-              <a href={`mailto:${siteConfig.email}`} className={styles.ctaSecondary}>
-                Get in touch
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Name — slides up, fades to watermark, vanishes on scroll */}
-        <motion.div
-          className={`${styles.nameBlock} ${isReveal ? styles.nameBlockRevealed : ''}`}
-          style={isReveal ? { opacity: nameOpacity } : undefined}
-        >
+        {/* Bottom group — close to the page fold */}
+        <div className={styles.tickerSection}>
           <Container>
             <motion.div
-              className={styles.nameInner}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ duration: 1.2, ease, delay: 0.1 }}
+              className={styles.tickerBlock}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isReveal ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease, delay: 0.65 }}
             >
-              <motion.span
-                className={styles.nameFirst}
-                animate={{ opacity: isReveal ? 0.08 : 1 }}
-                transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
-              >
-                Yash
-              </motion.span>
-              <motion.span
-                className={styles.nameLast}
-                animate={{ opacity: isReveal ? 0.12 : 1 }}
-                transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
-              >
-                Sonwaney
-              </motion.span>
+              <span className={styles.tickerLabel}>My Competencies</span>
+              <Ticker />
             </motion.div>
           </Container>
-        </motion.div>
+        </div>
       </section>
-
     </>
   );
 }

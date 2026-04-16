@@ -2,54 +2,69 @@
   padding: var(--space-12) 0;
 }
 
-/* ---- Category tab bar ---- */
-.tabBar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.tabBar::-webkit-scrollbar {
-  display: none;
-}
-
-.tab,
-.tabActive {
-  all: unset;
+/* ---- "What are you looking for?" label ---- */
+.filterLabel {
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+
+/* ---- Pill tab bar ---- */
+.tabBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--space-8);
+}
+
+/* Base pill — mirrors site's ctaSecondary sizing */
+.pill {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  padding-bottom: 12px;
-  transition: color 200ms ease;
-}
-
-.tab {
-  color: var(--text-tertiary);
-}
-
-.tab:hover {
+  padding: 9px 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
   color: var(--text-secondary);
+  background: transparent;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
-.tabActive {
+/* Active pill — solid dark fill, mirrors ctaPrimary */
+.pill[data-active="true"] {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+/* Category accent colors on inactive pills */
+.pill[data-category="Product Design"]:not([data-active="true"]) {
   color: var(--accent);
+  border-color: var(--accent);
 }
 
-/* Sliding underline indicator */
-.tabIndicator {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: var(--accent);
-  border-radius: 1px;
+.pill[data-category="Strategy"]:not([data-active="true"]) {
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+}
+
+.pill[data-category="Research"]:not([data-active="true"]) {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Hover — lift like ctaSecondary */
+.pill:not([data-active="true"]):hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ---- Project grid ---- */
@@ -91,4 +106,3 @@
   /* Row 5: full width */
   .grid > *:nth-child(9) { grid-column: 1 / 8; }
 }
-

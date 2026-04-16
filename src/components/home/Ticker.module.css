@@ -8,22 +8,14 @@
   padding: 13px 0;
 }
 
-/* Outer track — clips overflow */
-.track {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Each inner strip — two copies for seamless infinite loop */
+/* Single strip — 6 copies of keywords so it's always wider than the viewport.
+   Translating by -100%/6 moves exactly one set's width for a seamless loop. */
 .inner {
   display: flex;
-  flex-shrink: 0;
   align-items: baseline;
-  gap: 48px;
+  width: max-content;
   white-space: nowrap;
-  animation: ticker-scroll 60s linear infinite;
-  padding-right: 48px;
+  animation: ticker-scroll 25s linear infinite;
 }
 
 .ticker:hover .inner {
@@ -35,38 +27,37 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    /* -100% / 6 copies = exactly one keyword set's width */
+    transform: translateX(calc(-100% / 6));
   }
 }
 
+/* padding-right acts as the inter-item spacer so each item's width is
+   self-contained — this makes the 1/6 translate divide evenly */
 .item {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 16px;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   color: var(--text-secondary);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.quote {
-  font-style: italic;
+.keyword {
+  text-transform: uppercase;
   color: var(--text-secondary);
-}
-
-.attribution {
-  font-style: normal;
-  font-weight: 500;
-  color: var(--text-primary);
-  opacity: 0.5;
-  margin-left: 4px;
 }
 
 .dot {
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--accent);
   flex-shrink: 0;
-  opacity: 0.7;
+  opacity: 0.8;
   vertical-align: middle;
 }
