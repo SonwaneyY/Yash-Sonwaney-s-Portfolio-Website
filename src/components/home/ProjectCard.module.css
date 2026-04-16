@@ -1,63 +1,84 @@
 .card {
-  display: block;
-  transition: transform 200ms ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-.imageWrapper {
   position: relative;
-  aspect-ratio: 16 / 10;
-  background-color: var(--bg-secondary);
-  border-radius: 8px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
   overflow: hidden;
+  background-color: var(--bg-secondary);
+}
+
+/* Full-bleed image */
+.imageWrapper {
+  position: absolute;
+  inset: 0;
 }
 
 .imageInner {
   position: relative;
   width: 100%;
-  height: 106%; /* slight extra height for parallax travel */
+  height: 106%;
+  margin-top: -3%;
 }
 
 .coverImage {
   /* object-fit and object-position set inline per project */
 }
 
-.content {
-  padding-top: var(--space-2);
+/* Gradient overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(24px, 3vw, 48px);
+  background: linear-gradient(
+    to top,
+    rgba(10, 8, 6, 0.82) 0%,
+    rgba(10, 8, 6, 0.35) 45%,
+    transparent 75%
+  );
+  transition: background 300ms ease;
+}
+
+.card:hover .overlay {
+  background: linear-gradient(
+    to top,
+    rgba(10, 8, 6, 0.88) 0%,
+    rgba(10, 8, 6, 0.45) 50%,
+    transparent 80%
+  );
 }
 
 .category {
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 10px;
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: clamp(22px, 2.8vw, 38px);
   font-weight: 400;
-  color: var(--text-primary);
-  margin-top: 6px;
-  line-height: 1.25;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
 }
 
 .subtitle {
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: 4px;
+  font-size: clamp(13px, 1.2vw, 15px);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
+  max-width: 560px;
 }
 
 .meta {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-top: 8px;
+  display: none;
 }

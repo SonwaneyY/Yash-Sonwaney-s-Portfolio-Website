@@ -54,23 +54,17 @@ export default function ProjectCard({
 
   return (
     <Link href={`/work/${slug}`} className={styles.card} ref={ref}>
-      <motion.div
+      {/* Full-bleed image with parallax */}
+      <div
         className={styles.imageWrapper}
-        variants={imageReveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-5%" }}
         style={imageConfig.bg ? { backgroundColor: imageConfig.bg } : undefined}
       >
-        <motion.div
-          className={styles.imageInner}
-          style={{ y: imageY }}
-        >
+        <motion.div className={styles.imageInner} style={{ y: imageY }}>
           <Image
             src={coverImage}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+            sizes="(max-width: 768px) 80vw, 65vw"
             className={styles.coverImage}
             style={{
               objectFit: imageConfig.fit,
@@ -78,16 +72,13 @@ export default function ProjectCard({
             }}
           />
         </motion.div>
-      </motion.div>
-      <div className={styles.content}>
+      </div>
+
+      {/* Gradient overlay with text */}
+      <div className={styles.overlay}>
         <span className={styles.category}>{category}</span>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.subtitle}>{subtitle}</p>
-        {(company || year) && (
-          <span className={styles.meta}>
-            {[company, year].filter(Boolean).join(" · ")}
-          </span>
-        )}
       </div>
     </Link>
   );

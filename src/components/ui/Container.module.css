@@ -3,20 +3,6 @@
   max-width: var(--max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
+  padding-left: var(--container-pad);
+  padding-right: var(--container-pad);
 }

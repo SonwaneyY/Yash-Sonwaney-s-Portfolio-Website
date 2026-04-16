@@ -1,14 +1,35 @@
 .section {
-  padding: var(--space-12) 0;
+  padding-top: var(--space-15); /* extra top breathing room — distinct from hero */
 }
 
-/* ---- "What are you looking for?" label ---- */
+/* ---- "What are you looking for?" — scrolls away ---- */
 .filterLabel {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin: 0 0 14px;
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-3);
+}
+
+/* ---- Sticky viewport — pins while scrollDriver scrolls ---- */
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* ---- Only pills are sticky ---- */
+.stickyFilter {
+  flex-shrink: 0;
+  padding: var(--space-4) 0;
+  background: var(--bg-primary);
+  z-index: 10;
 }
 
 /* ---- Pill tab bar ---- */
@@ -17,10 +38,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: var(--space-8);
 }
 
-/* Base pill — mirrors site's ctaSecondary sizing */
 .pill {
   all: unset;
   display: inline-flex;
@@ -38,14 +57,12 @@
   transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
-/* Active pill — solid dark fill, mirrors ctaPrimary */
 .pill[data-active="true"] {
   background: var(--text-primary);
   color: var(--bg-primary);
   border-color: var(--text-primary);
 }
 
-/* Category accent colors on inactive pills */
 .pill[data-category="Product Design"]:not([data-active="true"]) {
   color: var(--accent);
   border-color: var(--accent);
@@ -61,48 +78,50 @@
   border-color: var(--text-primary);
 }
 
-/* Hover — lift like ctaSecondary */
 .pill:not([data-active="true"]):hover {
   border-color: var(--accent);
   color: var(--accent);
 }
 
-/* ---- Project grid ---- */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
+/* ---- Filmstrip area — fills remaining viewport height ---- */
+.filmstripViewport {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  /* Single source: inherits --container-pad from globals */
+  padding: var(--space-4) var(--container-pad) var(--space-6);
 }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
+/* ---- Filmstrip — translates horizontally via scroll ---- */
+.filmstrip {
+  display: flex;
+  gap: var(--space-2); /* 16px token — consistent at all breakpoints */
+  height: 100%;
+  will-change: transform;
+}
+
+/* ---- Individual card slide ---- */
+.slide {
+  flex: 0 0 80vw;
+  height: 100%;
+}
+
+@media (min-width: 640px) {
+  .slide {
+    flex: 0 0 52vw;
   }
 }
 
 @media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--space-3);
+  .slide {
+    /* cap at 400px so cards don't balloon on 1440+ screens */
+    flex: 0 0 min(400px, 34vw);
   }
+}
 
-  /* Row 1: large + small */
-  .grid > *:nth-child(1) { grid-column: 1 / 8; }
-  .grid > *:nth-child(2) { grid-column: 8 / 13; }
-
-  /* Row 2: small + large */
-  .grid > *:nth-child(3) { grid-column: 1 / 6; }
-  .grid > *:nth-child(4) { grid-column: 6 / 13; }
-
-  /* Row 3: large + small */
-  .grid > *:nth-child(5) { grid-column: 1 / 8; }
-  .grid > *:nth-child(6) { grid-column: 8 / 13; }
-
-  /* Row 4: small + large */
-  .grid > *:nth-child(7) { grid-column: 1 / 6; }
-  .grid > *:nth-child(8) { grid-column: 6 / 13; }
-
-  /* Row 5: full width */
-  .grid > *:nth-child(9) { grid-column: 1 / 8; }
+@media (min-width: 1440px) {
+  .slide {
+    flex: 0 0 360px;
+  }
 }

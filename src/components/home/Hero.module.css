@@ -209,23 +209,6 @@
   width: 100%;
 }
 
-/* Mobile: pin to viewport bottom so it's always visible */
-@media (max-width: 767px) {
-  .tickerSection {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: var(--bg-primary);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-
-  /* Spacer so hero content isn't hidden behind the fixed bar */
-  .hero {
-    padding-bottom: 100px;
-  }
-}
 
 /* ============================================
    TICKER BLOCK — label + ticker band

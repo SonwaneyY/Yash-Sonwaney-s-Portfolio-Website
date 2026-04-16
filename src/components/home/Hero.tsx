@@ -62,14 +62,6 @@ export default function Hero() {
 
       {/* ---- MAIN HERO ---- */}
       <section className={styles.hero}>
-        {/* Geometric arc */}
-        <motion.div
-          className={styles.geometricArc}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={isReveal ? { scale: 1, opacity: 0.4 } : {}}
-          transition={{ duration: 1.5, ease }}
-        />
-
         {/* Top group — close to the header */}
         <Container>
           <div className={styles.topContent}>
