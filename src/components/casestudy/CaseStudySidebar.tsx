@@ -43,12 +43,6 @@ export default function CaseStudySidebar({ items }: CaseStudySidebarProps) {
     };
   }, [items]);
 
-  const handleClick = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <aside className={styles.sidebar}>
       <Link href="/" className={styles.backLink}>
@@ -56,15 +50,16 @@ export default function CaseStudySidebar({ items }: CaseStudySidebarProps) {
         <span>Back</span>
       </Link>
 
-      <nav className={styles.nav}>
+      <nav className={styles.nav} aria-label="Case study sections">
         {items.map((item) => (
-          <button
+          <a
             key={item.id}
+            href={`#${item.id}`}
             className={`${styles.navItem} ${activeId === item.id ? styles.navItemActive : ""}`}
-            onClick={() => handleClick(item.id)}
+            aria-current={activeId === item.id ? "true" : undefined}
           >
             {item.label}
-          </button>
+          </a>
         ))}
       </nav>
     </aside>

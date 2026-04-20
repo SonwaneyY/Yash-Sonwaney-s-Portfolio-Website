@@ -1,15 +1,16 @@
 .section {
   padding: var(--space-12) 0;
   background-color: var(--bg-secondary);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
-/* Hidden measurer to calculate tallest testimonial */
 .measurer {
   position: absolute;
   visibility: hidden;
   pointer-events: none;
   width: 100%;
-  max-width: 640px;
+  max-width: 620px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -29,7 +30,7 @@
 }
 
 .quoteWrapper {
-  max-width: 640px;
+  max-width: 620px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -38,42 +39,39 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: clamp(18px, 1.8vw, 22px);
   font-weight: 400;
   font-style: italic;
   color: var(--text-primary);
   line-height: 1.5;
 }
 
-@media (min-width: 768px) {
-  .quote {
-    font-size: 22px;
-  }
-}
-
 .attribution {
-  font-family: var(--font-sans);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-tertiary);
   margin-top: var(--space-3);
 }
 
+/* Tick marks instead of dots */
 .dots {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin-top: var(--space-5);
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--border);
-  transition: background-color 300ms ease;
-  cursor: pointer;
+  width: 18px;
+  height: 1px;
+  background-color: var(--rule);
   border: none;
   padding: 0;
+  cursor: pointer;
+  transition: background-color 400ms ease;
 }
 
 .dotActive {

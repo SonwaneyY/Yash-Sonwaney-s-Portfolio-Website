@@ -1,27 +1,5 @@
 /* ============================================
-   WAVE EMOJI
-   ============================================ */
-.wave {
-  display: inline-block;
-  font-size: 1.2em;
-  line-height: 1;
-  vertical-align: middle;
-  transform-origin: 70% 80%;
-  animation: wave 2.4s ease-in-out infinite;
-}
-
-@keyframes wave {
-  0%   { transform: rotate(0deg); }
-  15%  { transform: rotate(18deg); }
-  30%  { transform: rotate(-8deg); }
-  45%  { transform: rotate(16deg); }
-  60%  { transform: rotate(-4deg); }
-  75%  { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* ============================================
-   INTRO OVERLAY — covers all content during loading
+   INTRO OVERLAY
    ============================================ */
 .introOverlay {
   position: fixed;
@@ -33,27 +11,11 @@
   justify-content: center;
 }
 
-/* Progress bar */
-.progressWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.progressTrack {
-  width: min(280px, 60vw);
-  height: 20px;
-  background-color: var(--border);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.progressBar {
-  width: 100%;
-  height: 100%;
-  background-color: var(--accent);
+.introRule {
+  width: min(280px, 50vw);
+  height: 1px;
+  background-color: var(--text-tertiary);
   transform-origin: left;
-  border-radius: 9999px;
 }
 
 /* ============================================
@@ -61,259 +23,93 @@
    ============================================ */
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: calc(98svh - 70px); /* 98svh minus approx. header height */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 14vh;
-  padding-bottom: max(80px, 10vh);
-  overflow-x: clip;
 }
 
-/* ---- Geometric arc ---- */
-.geometricArc {
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 70vw;
-  height: 70vw;
-  max-width: 800px;
-  max-height: 800px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  opacity: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* ============================================
-   TOP CONTENT — headline + subheadline, near header
-   ============================================ */
-.topContent {
-  position: relative;
-  z-index: 2;
+.heroContent {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  justify-content: center;
 }
 
-.roleLabel {
-  display: inline-block;
-  font-family: var(--font-sans);
+.tickerContainer {
+  margin-top: 0;
+}
+
+/* ---- Typed greeting ---- */
+.greeting {
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: var(--space-3);
+  line-height: 1;
+  margin-bottom: var(--space-6);
+  min-height: 1em;
 }
 
-.headline {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 400;
-  color: var(--text-primary);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  max-width: 780px;
-  margin-bottom: var(--space-3);
+.greetingCursor {
+  display: inline-block;
+  margin-left: 1px;
+  font-weight: 300;
+  transition: opacity 0.08s;
 }
 
-.subheadline {
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 2.2vw, 28px);
-  font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  max-width: 720px;
+.greetingPeriod {
+  transition: opacity 0.08s;
 }
 
-.belowHeadline {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
-.bio {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 520px;
-  text-align: left;
-}
-
-/* ---- CTAs ---- */
-.ctaGroup {
+/* ---- Eyebrow ---- */
+.eyebrow {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: var(--space-5);
 }
 
-.ctaPrimary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--bg-primary);
-  background-color: var(--text-primary);
-  padding: 14px 32px;
-  border-radius: 9999px;
-  transition: background-color 300ms ease, transform 200ms ease;
-}
-
-.ctaPrimary:hover {
-  background-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.ctaPrimary svg {
-  transition: transform 200ms ease;
-}
-
-.ctaPrimary:hover svg {
-  transform: translateX(3px);
-}
-
-.ctaSecondary {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  padding: 14px 32px;
-  border-radius: 9999px;
-  border: 1px solid var(--text-tertiary);
-  transition: border-color 300ms ease, color 300ms ease, transform 200ms ease;
-}
-
-.ctaSecondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ============================================
-   TICKER SECTION — wrapper for bottom group
-   ============================================ */
-.tickerSection {
-  width: 100%;
-}
-
-
-/* ============================================
-   TICKER BLOCK — label + ticker band
-   ============================================ */
-.tickerBlock {
-  width: 100%;
-  max-width: 720px;
-  overflow: hidden;
-}
-
-.tickerLabel {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  border-top: 1px solid var(--border);
-  padding-top: var(--space-2);
-  margin-bottom: var(--space-2);
-}
-
-/* ============================================
-   EXPERIENCE STRIP — with logos
-   ============================================ */
-.experienceStrip {
-  padding: var(--space-8) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.experienceGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4) var(--space-3);
-}
-
-@media (min-width: 768px) {
-  .experienceGrid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-3);
-  }
-}
-
-.experienceItem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
-}
-
-@media (min-width: 768px) {
-  .experienceItem {
-    padding-right: var(--space-3);
-    border-right: 1px solid var(--border);
-  }
-
-  .experienceItem:last-child {
-    border-right: none;
-  }
-}
-
-/* Logo container */
-.experienceLogo {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.logoImg {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.experienceText {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.experienceCompany {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-.experienceRole {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.experienceYear {
-  font-family: var(--font-sans);
+.eyebrowNum {
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+.eyebrowLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
+
+/* ---- Display statement ---- */
+.statement {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 3.5vw, 64px);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  max-width: 900px;
+  margin-bottom: var(--space-6);
+}
+
+/* ---- Subline ---- */
+.subline {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  max-width: 540px;
+  margin-bottom: 0;
+}
+
+

@@ -4,7 +4,7 @@ export const siteConfig = {
   initials: "YS",
   tagline: "Designing systems that make complex things feel simple.",
   bio: "Senior product designer with 7+ years of experience shaping enterprise tools, service ecosystems, and AI-native workflows. Currently finishing an MS in Strategic Design & Management at Parsons School of Design.",
-  email: "yash@email.com",
+  email: "yash.sonwaney@newschool.edu",
   linkedin: "https://linkedin.com/in/yashsonwaney",
 };
 
@@ -23,6 +23,9 @@ export type CaseStudySection =
   | { type: "image"; src: string; alt: string; caption?: string; layout?: "default" | "mobile" }
   | { type: "two-images"; images: { src: string; alt: string; caption?: string }[]; layout?: "default" | "mobile" }
   | { type: "quote"; text: string; attribution?: string }
+  | { type: "pull-quote"; text: string; attribution?: string }
+  | { type: "callout"; label: string; body: string[] }
+  | { type: "steps"; title?: string; items: { num: string; label: string; body?: string }[] }
   | { type: "metrics"; items: { value: string; label: string }[] }
   | { type: "chart"; chartId: "subscriber-growth" | "conversion-milestones" | "churn-reasons"; caption?: string };
 
@@ -37,199 +40,241 @@ export interface CaseStudy {
 
 export const projects = [
   {
-    slug: "anti-bias-ai-training",
-    title: "Anti-bias AI Training Tool for Capital Allocators",
-    subtitle: "An experimental training platform for early-stage VC investors that improves venture evaluation and reduces bias in pitch decision-making.",
-    category: "AI-ENABLED RESEARCH",
+    slug: "beyond-efficiency",
+    title: "Beyond Efficiency: Understanding the Paradox of AI in Hiring",
+    subtitle: "A design research capstone investigating how automation and AI have created a paradox — employers drown in high-volume, low-relevance applications while qualified candidates are systematically excluded.",
+    category: "DESIGN RESEARCH",
     filterCategory: "Research" as ProjectCategory,
-    coverImage: "/covers/anti-bias-ai-training.png",
-    imageConfig: { fit: "cover" as const, position: "center 40%" },
+    year: "2025",
+    cardBg: "#F5F0E8",
+    cardTextColor: "dark" as const,
+    coverImage: "/covers/beyond-efficiency.png",
+    imageConfig: { fit: "cover" as const, position: "center 75%" },
     caseStudy: {
-      role: "Lead Designer & Researcher",
-      timeline: "Sep 2024 — Jan 2025",
-      tools: ["Figma", "Next.js", "Claude API", "Supabase"],
-      team: "Solo (advised by Parsons faculty)",
+      role: "Lead Researcher & Designer",
+      timeline: "Fall 2025",
+      tools: ["DARN Framework", "Focus Groups", "Employer Interviews", "Candidate Surveys", "Thematic Analysis", "Figma"],
+      team: "Yash Sonwaney & Ananya (Parsons Design Research Capstone)",
       sections: [
         {
           type: "text" as const,
-          heading: "72% Changed How They Asked Questions",
+          heading: "The Paradox of Efficiency",
           body: [
-            "Venture capital has a well-documented bias problem. Research consistently shows that founders from underrepresented backgrounds receive disproportionately less funding — not because their ideas are weaker, but because investors unconsciously evaluate them differently. Existing bias training relies on lectures and self-reflection, which rarely change behavior. I wanted to build something that made bias visible in the investor's own words, in real time.",
-            "So I designed and built an AI-powered training tool that catches investors in the act of biased questioning — and helps them understand why, without shame.",
-          ],
-        },
-        {
-          type: "metrics" as const,
-          items: [
-            { value: "72%", label: "Of investors showed measurable bias shift" },
-            { value: "10", label: "Questions analyzed per pitch session" },
-            { value: "2", label: "Pitch versions — anonymized vs. non-anonymized" },
-            { value: "< 15min", label: "Average session completion time" },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "Research & Discovery",
-          body: [
-            "I started by studying how bias manifests in investor-founder interactions. Through literature reviews and interviews with angel investors, I identified four key bias patterns: focus shift bias (asking about credentials instead of the product), comparative bias (holding different founders to different standards), microaggressions, and implicit doubt.",
-            "The key insight was that bias isn't in what investors think — it's in what they ask. The questions an investor poses reveal their assumptions about a founder's competence, credibility, and potential. If you can make those questions visible and nameable, you have a teachable moment.",
+            "Tech hiring promised to get better with AI. Instead, it created a paradox. Employers face an overwhelming flood of applications — many AI-generated — and can't identify the right candidates. Candidates submit hundreds of applications into black-box systems and hear nothing back. Both sides are more frustrated than ever, even as the tools supposedly optimizing the process multiply.",
+            "This research project set out to understand that contradiction. Using a multi-method approach, we mapped the hiring ecosystem from both sides — candidate and employer — to identify where the system breaks down, who bears the cost, and how design might intervene.",
           ],
         },
         {
           type: "image" as const,
-          src: "/covers/anti-bias-ai-training.png",
-          alt: "Bias analysis dashboard showing per-question scoring",
-          caption: "The bias report breaks down each question with a score, reframed alternative, and psychological insight.",
+          src: "/case-studies/beyond-efficiency/hypothesis.png",
+          alt: "Research hypothesis: the paradox of efficiency in AI-driven hiring",
+          caption: "The central hypothesis — automation creates high volume but low relevance for employers, while qualified candidates are filtered out.",
         },
         {
-          type: "text" as const,
-          heading: "Constraints",
+          type: "metrics" as const,
+          items: [
+            { value: "92%", label: "Of candidates don't trust AI to be fair in hiring" },
+            { value: "61%", label: "Of candidates are ghosted even after an interview" },
+            { value: "30–50%", label: "Increase in applications in 24 months due to AI-generated resumes" },
+            { value: "53%", label: "Of recruiters report burnout from high volumes of low-quality applications" },
+            { value: "$180K", label: "Average cost of a bad hire for a mid-level tech role" },
+          ],
+        },
+        {
+          type: "callout" as const,
+          label: "The Core Finding",
           body: [
-            "This was a solo research build under thesis constraints — no dedicated engineering support, no budget for participant incentives, and a hard deadline tied to the academic calendar. Recruiting busy angel investors for a study that explicitly examines their biases required careful framing: this had to feel like a performance tool, not a test.",
-            "The hardest design constraint was tonal. The tool needed to surface uncomfortable truths without triggering defensiveness — and do it through AI-generated feedback, where it's easy to feel judged by a machine. Every word in the feedback UI was calibrated for that balance.",
+            "AI in hiring hasn't reduced inefficiency — it has displaced it. The burden has shifted from volume management to verification, from filtering to fraud detection. Both sides are working harder than before, inside a system where the tools meant to help are generating the problems they were sold to solve.",
           ],
         },
         {
           type: "text" as const,
-          heading: "Design Approach",
+          heading: "Research Questions",
           body: [
-            "The experiment presents investors with two versions of the same startup pitch — one anonymized (avatar-based, identifying features obscured) and one non-anonymized (real founder visible). After each pitch, investors allocate investment amounts and ask up to 10 questions.",
-            "Each question is analyzed in real-time by the Claude API against the four bias patterns. The system generates a bias score, a witty but educational explanation, and a reframed version of the question that achieves the same information-gathering goal without the embedded bias.",
-            "The tone was critical to get right. Nobody learns from being shamed. The tool opens with light humor to disarm defensiveness, then shifts to genuine, supportive guidance. Think: a bias coach who roasts you just enough to get your attention, then helps you understand why it matters.",
+            "Three questions oriented our inquiry. First: how has AI reshaped hiring, and where do inequities emerge for both candidates and employers? Second: how have AI hiring tools changed how recruiters and hiring managers actually work and make decisions — day to day, not in the abstract? Third: how are candidates adapting to the opacity, ghosting, and systemic inequities baked into modern hiring?",
+            "These questions were deliberately held together rather than treated separately. The hiring system is relational — understanding the candidate experience required understanding the recruiter experience, and vice versa.",
           ],
         },
         {
-          type: "quote" as const,
-          text: "The best bias training doesn't tell people they're biased — it shows them, in their own words, in real time.",
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/research-questions.png",
+          alt: "Three research questions guiding the inquiry",
+          caption: "Our three research questions — held together as a relational system, not separate tracks.",
+        },
+        {
+          type: "text" as const,
+          heading: "Research Methods",
+          body: [
+            "We used a mixed-methods approach combining primary and secondary research. On the primary side: in-depth interviews with recruiters and hiring managers, a candidate survey with 51 responses, and focus group discussions with candidates navigating active job searches.",
+            "Secondary research included a literature review of bias and automation research, social media scans of communities where candidates discuss hiring tactics (Reddit, Blind, LinkedIn), and industry market reports from Greenhouse, Joveo, and The Planet Group.",
+            "To map the system as a whole, we applied the D-A-R-N framework — Devices, Actors, Representations, Networks — a strategic design method that surfaces the material and social infrastructure underpinning a market. This helped us see how ATS platforms, AI scoring algorithms, LinkedIn Recruiter, candidate resumes, and job descriptions interact as a system, not just as individual tools.",
+          ],
         },
         {
           type: "two-images" as const,
           images: [
-            { src: "/covers/anti-bias-ai-training.png", alt: "Anonymized pitch view", caption: "Anonymized pitch: avatar-based, identifying features obscured" },
-            { src: "/covers/anti-bias-ai-training.png", alt: "Non-anonymized pitch view", caption: "Non-anonymized: same pitch, real founder visible" },
+            {
+              src: "/case-studies/beyond-efficiency/research-methods.png",
+              alt: "Primary and secondary research methods overview",
+              caption: "Mixed-method approach: employer interviews, 51-response candidate survey, focus groups, literature review.",
+            },
+            {
+              src: "/case-studies/beyond-efficiency/darn-map.png",
+              alt: "D-A-R-N system map of the hiring ecosystem",
+              caption: "The D-A-R-N map — Devices, Actors, Representations, Networks — surfacing the hiring system's full infrastructure.",
+            },
           ],
         },
         {
           type: "text" as const,
-          heading: "Technical Implementation",
+          heading: "The ATS Pipeline & Where AI Enters",
           body: [
-            "Built as a Next.js application with Supabase for session persistence and the Claude API for real-time bias analysis. The prompt engineering was the hardest technical problem — calibrating the model to flag subtle bias patterns without over-flagging legitimate due diligence questions required multiple rounds of testing against transcripts from real investor Q&As.",
-            "The system tracks everything: watch duration, investment amounts, question timestamps, and bias scores. This data feeds into a researcher dashboard that exports to CSV for academic analysis, making the tool useful both as a training intervention and a research instrument.",
+            "Most candidates interact with a 7-stage hiring pipeline: job posting, resume submission, AI-powered skill extraction, machine learning ranking by fit score, recruiter review and shortlisting, interview coordination, and final decision. AI is most densely concentrated in stages 3 and 4 — extracting qualifications and ranking candidates before any human sees the application.",
+            "What looks like a clean pipeline obscures the reality: recruiters told us that most of their work is still manual, concentrated at the stages where AI is supposed to help most. One recruiter described spending an entire week on a single role that received over a thousand applications. The AI had filtered — but the shortlist it produced still required significant human judgment to evaluate.",
           ],
         },
         {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/ats-workflow.png",
+          alt: "7-stage ATS workflow showing where AI is densely integrated, integrated, or only assisting",
+          caption: "The 7-stage ATS pipeline — stages 3 and 4 have the densest AI involvement, yet recruiters report those stages still demand heavy manual effort.",
+        },
+        {
+          type: "pull-quote" as const,
+          text: "It's not the rejection that hurts — it's sitting in that grey area, not knowing if any human ever even saw my application.",
+          attribution: "Candidate, Focus Group Discussion",
+        },
+        {
           type: "text" as const,
-          heading: "Outcome & Reflection",
+          heading: "What Candidates Are Experiencing",
           body: [
-            "Early testing with 15 investors showed that 72% demonstrated measurable changes in questioning patterns between the first and second pitch. The anonymized condition consistently received more product-focused questions; the non-anonymized version triggered more credential-focused and skeptical lines of inquiry — exactly the bias pattern the tool was designed to surface.",
-            "This project is being presented as part of my MS thesis at Parsons and is under consideration for use in investor education programs. If I were to extend it, I'd build a longitudinal version that tracks questioning behavior across multiple sessions — the interesting question isn't whether bias shifts during the experiment, but whether it holds afterward.",
+            "Candidates described a hiring process defined by opacity and asymmetry. Applications disappear into ATS systems with no feedback. The rise of AI-generated resumes has made keyword optimization feel mandatory, pushing candidates to game systems rather than communicate their actual experience. 61% reported being ghosted after completing an interview — a stage where candidates have already invested significant time and emotional energy.",
+            "The 92% distrust figure for AI fairness wasn't cynicism — it reflected lived experience. Candidates who optimized their resumes by mirroring job description language reported better response rates, regardless of underlying fit. The system rewards pattern-matching over capability, and candidates know it.",
           ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/candidate-journey.png",
+          alt: "Candidate journey map showing emotional states from awareness through offer stage",
+          caption: "The candidate journey — moving from overwhelmed and unsure at awareness, to strained during preparation, to guarded hope through screening, with relief only at offer.",
+        },
+        {
+          type: "quote" as const,
+          text: "Recruitment is still very manual. One role had over a thousand applications and I spent an entire week just going through them.",
+          attribution: "Recruiter P002, Employer Interview",
+        },
+        {
+          type: "text" as const,
+          heading: "What Employers Are Experiencing",
+          body: [
+            "Recruiters and hiring managers described being overwhelmed, not empowered. AI hiring tools have increased application volume dramatically but haven't solved the quality problem. 53% of recruiters reported burnout from reviewing high volumes of low-quality, often AI-generated applications.",
+            "A new category of problem emerged: fraud. 17% of hiring managers reported interviewing a deepfake candidate — a sign that AI-generated applications are no longer just keyword-stuffed resumes but increasingly fabricated identities. The most consistent AI use case recruiters actually valued wasn't ranking or scoring — it was detecting fake profiles at the top of the funnel.",
+            "The best candidates, multiple recruiters noted, still come from outbound sourcing via LinkedIn Recruiter — a manual process. The tools meant to automate inbound hiring haven't replaced the human judgment required to identify genuine fit.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/employer-journey.png",
+          alt: "Employer journey map showing emotional states from awareness through decision-making",
+          caption: "The employer journey — alert at job posting, hopeful at inflow, then overloaded, stressed, and cautious as volume overwhelms the process.",
+        },
+        {
+          type: "text" as const,
+          heading: "Candidate Needs",
+          body: [
+            "Synthesis across survey responses and focus group sessions identified four core needs. First, trust through fair evaluation — candidates want to know the criteria for assessment and that those criteria apply consistently regardless of identity markers. Second, closure over silence — rejection is acceptable; disappearing without response is not. Third, protection from burnout — the process of applying to dozens of roles weekly, reformatting materials per ATS, and managing uncertainty is exhausting. Fourth, agency in a system that feels rigged — candidates want the process to feel like a two-way assessment, not an opaque filter.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/candidate-needs.png",
+          alt: "Four synthesized candidate needs: Trust, Closure, Protection from Burnout, Restored Agency",
+          caption: "Four candidate needs synthesized from surveys and focus groups — trust, closure, burnout protection, and restored agency.",
+        },
+        {
+          type: "text" as const,
+          heading: "Employer Needs",
+          body: [
+            "Employers surfaced four parallel needs. First, identifying authentic candidates — separating real, qualified humans from AI-generated applications has become a primary concern. Second, managing application volume — the volume problem isn't solved by existing AI tools; it has been created, in part, by them. Third, closing communication gaps — ghosting persists not because recruiters are indifferent but because the process is so manual that communication falls through. Fourth, technology as a cognitive offloader — recruiters want AI to handle the mechanical parts of the process so they can invest judgment in evaluation and relationship-building.",
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/employer-needs.png",
+          alt: "Four synthesized employer needs: Authentic Candidates, Volume Management, Communication Gaps, Cognitive Offloading",
+          caption: "Four employer needs synthesized from recruiter and hiring manager interviews — authenticity, volume, communication, and cognitive offloading.",
+        },
+        {
+          type: "text" as const,
+          heading: "Opportunity & Direction",
+          body: [
+            "The research converged on a single reframe: the opportunity isn't to make hiring faster, it's to make it more legible for everyone involved. The question we carried into concept development was: how might we rebalance AI in tech hiring to reduce recruiter overload while making qualified candidates more visible?",
+            "The theory of change we developed positioned technology as a cognitive offloader — handling mechanical tasks so humans can focus on what requires judgment. In practice, this means less manual processing of applications leads to deeper evaluation of fit, which enables more consistent candidate communication, which attracts more engaged and higher-quality candidates. It's a compounding loop, not a one-time fix.",
+            "Our first concept direction was Loop: an AI candidate communication agent that keeps every candidate informed without recruiters having to send a single email themselves. Loop addresses the most emotionally costly part of the hiring process — ghosting — while freeing recruiter bandwidth for higher-value work. Prototyping and testing is underway in Spring 2026.",
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            {
+              src: "/case-studies/beyond-efficiency/opportunity-statement.png",
+              alt: "How might we rebalance AI in tech hiring",
+              caption: "The opportunity statement reframing the challenge from speed to legibility.",
+            },
+            {
+              src: "/case-studies/beyond-efficiency/theory-of-change.png",
+              alt: "Theory of change: technology as cognitive offloader leading to better hiring outcomes",
+              caption: "The theory of change — cognitive offloading cascades into deeper evaluation, consistent communication, and better candidate quality.",
+            },
+          ],
+        },
+        {
+          type: "image" as const,
+          src: "/case-studies/beyond-efficiency/loop-concept.png",
+          alt: "Loop: Candidate Communication Agent concept — keeping every candidate in the loop without sending a single email",
+          caption: "Concept I: Loop — an AI communication agent that eliminates ghosting by keeping every candidate informed, automatically.",
         },
       ],
     },
   },
   {
-    slug: "bridgit",
-    title: "Bridgit",
-    subtitle: "AI-powered assistant designed for specialized education teachers.",
-    category: "INCLUSIVE DESIGN RESEARCH",
-    filterCategory: "Research" as ProjectCategory,
-    coverImage: "/covers/bridgit.png",
-    imageConfig: { fit: "cover" as const, position: "center center" },
+    slug: "loop-strategy",
+    title: "Loop : Strategy",
+    subtitle: "Solving the problem of ghosting, Loop is an AI intelligence layer that autonomously manages rejection conversations for recruiters.",
+    category: "PRODUCT DESIGN · STRATEGY · AI PRODUCT",
+    filterCategory: "Product Design" as ProjectCategory,
+    year: "2024",
+    cardBg: "#1C1C1A",
+    cardTextColor: "light" as const,
+    coverImage: "/covers/loop-strategy.png",
+    imageConfig: { fit: "contain" as const, position: "center center", bg: "#faf9f7" },
     caseStudy: {
-      role: "UX Researcher & Interaction Designer",
-      timeline: "16 weeks — Microsoft EES × Parsons",
-      tools: ["Figma", "Miro", "Semi-structured Interviews", "Affinity Mapping", "Participatory Design"],
-      team: "4 designers (Microsoft External Engagement Studio × Parsons School of Design)",
+      role: "Product Designer & Strategist",
+      timeline: "Oct — Dec 2024",
+      tools: ["Figma", "Claude API", "Business Model Canvas", "User Interviews"],
+      team: "2 designers + 1 engineer",
       sections: [
         {
           type: "text" as const,
-          heading: "No One Was Building for the Specialists",
+          heading: "Overview",
           body: [
-            "Specialized education teachers — ESL instructors, speech pathologists, reading intervention specialists — manage their own schedules across multiple classrooms, write individualized plans for every student, and coordinate through hallway conversations and after-hours texts. No AI tool on the market was built for how they actually work. Bridgit changed that.",
-            "Over 16 weeks with Microsoft's External Engagement Studio at Parsons, I worked with a team of four to go from a deliberately open brief — 'How might we empower under-represented communities through AI?' — to a validated product direction grounded in seven interviews, seven literature reviews, and six participatory design sessions across three co-design rounds.",
+            "Ghosting is recruiting's dirty secret. Recruiters handle hundreds of candidates simultaneously, and the ones who don't get the job simply... never hear back. Loop is an AI intelligence layer that autonomously manages rejection conversations — turning the worst part of recruiting into a relationship-building opportunity.",
+            "I led the product strategy and interaction design, defining the AI's conversational tone, the recruiter's control surface, and the candidate experience. The core design challenge was making automated rejection feel genuinely human and constructive.",
           ],
         },
         {
           type: "metrics" as const,
           items: [
-            { value: "7", label: "Semi-structured interviews across 5 stakeholder groups" },
-            { value: "7", label: "Literature papers reviewed" },
-            { value: "6", label: "Co-design sessions across 3 rounds" },
-            { value: "3", label: "Major research pivots" },
+            { value: "85%", label: "Of candidates preferred Loop rejection over silence" },
+            { value: "3x", label: "Faster closure on open candidate loops" },
+            { value: "60%", label: "Reduction in recruiter time on rejection tasks" },
           ],
         },
         {
           type: "text" as const,
-          heading: "Open Brief, Documented Assumptions",
+          heading: "Outcome",
           body: [
-            "Microsoft gave us no target user, no domain, no constraints. Our team gravitated toward education — specifically, AI's role in elementary learning. Before any fieldwork, we logged six assumptions: 'AI will replace teachers,' 'Parents are nervous about AI,' 'Learning with AI is better than without.' Most turned out to be incomplete.",
-            "We scoped a mixed-methods study: literature review across seven papers, semi-structured interviews with seven participants spanning teachers, specialists, administrators, and parents, and three rounds of co-design workshops. The semi-structured format was deliberate — we didn't yet know which threads would matter most.",
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "The Same Bottleneck, Every Interview",
-          body: [
-            "Seven interviews. Four recurring patterns. Administrative overload: Meher, a speech pathologist, spends more time making her schedule than working with students. Broken parent communication: Olivia described texting, emailing, calling, and sending backpack notes to a parent and still getting no response. Technology adopted without support: Stephanie, 42 years in the classroom, recounted getting Apple computers with no training — 'nobody knew how to turn them on.' And foundational skills being sacrificed to screen time.",
-            "Three of seven literature papers had already flagged the same signal: implementation challenges in AI education sit overwhelmingly with teachers — not students, not parents. The interviews confirmed it from every direction.",
-          ],
-        },
-        {
-          type: "quote" as const,
-          text: "I might need to text, email, put a note in the backpack, and call home and I still won't hear anything.",
-          attribution: "Olivia, classroom teacher — on parent communication",
-        },
-        {
-          type: "text" as const,
-          heading: "Three Pivots",
-          body: [
-            "The research took three significant turns. The first came after interviews: we'd started centered on children. Every participant — regardless of role — pointed to teacher burden as the systemic bottleneck. We reframed the entire project around educators. The second pivot happened in co-design Round 2, when Meher and Stephanie revealed that specialist teachers experience every pain point at higher intensity than general classroom teachers — fragmented schedules across multiple classrooms, per-student documentation, and the lowest priority in school-wide scheduling. Competitive analysis confirmed no product addressed their workflow: Magic School, Brisk, and ClassDojo all target general classrooms.",
-            "The third pivot shaped the interaction model. Concept validation showed that specialists don't work in isolated tasks — they move through continuous rhythms of sessions, transitions, disruptions, and documentation. A tool offering discrete features would add fragmentation. Bridgit's AI became proactive rather than reactive: surfacing schedule disruptions, drafting session summaries, proposing make-up slots, and generating parent communications without being prompted.",
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            { src: "/casestudy/bridgit/dashboard.png", alt: "Bridgit dashboard with proactive AI assistant and daily overview", caption: "The dashboard surfaces the day's schedule, student alerts, and AI-generated tasks at a glance." },
-            { src: "/casestudy/bridgit/dashboard-absence.png", alt: "Bridgit handling an absent student with AI-suggested rescheduling", caption: "When a student is absent, Bridgit proactively suggests make-up slots — no manual scheduling required." },
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            { src: "/casestudy/bridgit/schedule.png", alt: "Bridgit weekly calendar view with color-coded sessions", caption: "Color-coded by student and session type — designed for specialists who need to scan their day in seconds." },
-            { src: "/casestudy/bridgit/schedule-ai.png", alt: "AI-suggested session slots for rescheduling", caption: "AI-generated make-up slot recommendations, validated in concept testing as a top-priority feature." },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "From Research to Product",
-          body: [
-            "The traceability between research and product was explicit. Color-coded scheduling came from concept validation: 'simple UI, color-coding needed — I'm moving between classrooms all day.' Proactive absence handling came from workshop data showing specialist schedules are highly prone to disruption. Structured note import came from Meher's finding that documentation consumes more time than instruction. Specialist-to-teacher messaging was validated as the single highest-value feature across all three co-design rounds.",
-            "Nothing in Bridgit exists because it seemed like a good idea. It exists because someone told us they needed it.",
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            { src: "/casestudy/bridgit/import-notes.png", alt: "Structured note import interface for session documentation", caption: "Structured note import — Meher's documentation burden translated directly into a core feature." },
-            { src: "/casestudy/bridgit/personalize.png", alt: "AI-generated personalization strategies per student", caption: "One-click personalization: AI surfaces activity guides and strategies tailored to each student's profile." },
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            { src: "/casestudy/bridgit/session-page.png", alt: "Session page with AI-drafted session summary", caption: "AI drafts the session summary — the specialist reviews and approves, rather than writing from scratch." },
-            { src: "/casestudy/bridgit/bulk-sending.png", alt: "AI-drafted parent communication templates for bulk sending", caption: "Parent communication templates drafted by AI — addressing Olivia's multi-channel outreach problem directly." },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "Reflection",
-          body: [
-            "Documenting assumptions before fieldwork created accountability — we couldn't rationalize around findings that contradicted our starting point. Shifting from generative to participatory methods at the right moment maintained momentum and gave participants ownership of the solution direction.",
-            "What I'd strengthen: observational shadowing to watch specialists through their actual day, longer usability testing cycles in-context, and time-motion baselines to quantify administrative burden in hours rather than themes. The qualitative evidence was strong. The quantitative case had room to grow.",
+            "Loop demonstrated that AI can handle sensitive human conversations when designed with empathy as a constraint, not an afterthought. The prototype was validated with 3 recruiting teams and is being developed further as a standalone product.",
           ],
         },
       ],
@@ -241,6 +286,9 @@ export const projects = [
     subtitle: "End-to-end service design and growth strategy for a circular outerwear subscription — from 1 subscriber to 120 and a 10/10 NPS in 9 months.",
     category: "GROWTH DESIGN · SERVICE DESIGN",
     filterCategory: "Strategy" as ProjectCategory,
+    year: "2025",
+    cardBg: "#2B3B2F",
+    cardTextColor: "light" as const,
     coverImage: "/covers/goretex-accesswear.png",
     imageConfig: { fit: "cover" as const, position: "center 35%" },
     caseStudy: {
@@ -279,7 +327,7 @@ export const projects = [
           chartId: "conversion-milestones" as const,
           caption: "Conversion rate as % of the original 200-person waitlist — before and after each phase of work.",
         },
-                {
+        {
           type: "text" as const,
           heading: "Research & Synthesis",
           body: [
@@ -312,7 +360,7 @@ export const projects = [
           chartId: "subscriber-growth" as const,
           caption: "Active subscriber growth across three design phases, May — December 2025.",
         },
-                {
+        {
           type: "image" as const,
           src: "/covers/goretex-accesswear.png",
           alt: "GORE-TEX AccessWear platform showing the rental subscription experience",
@@ -366,7 +414,7 @@ export const projects = [
           chartId: "churn-reasons" as const,
           caption: "Exit reasons cluster around inventory constraints and seasonal timing — not dissatisfaction with the subscription model itself.",
         },
-                {
+        {
           type: "metrics" as const,
           items: [
             { value: "12,000%", label: "Subscriber growth over 9 months" },
@@ -387,11 +435,79 @@ export const projects = [
     },
   },
   {
+    slug: "hp-scale-ui",
+    title: "HP: Scale UI",
+    subtitle: "Designing & shipping printer control panel UX for all HP Printers across market segments & user archetypes.",
+    category: "PRODUCT DESIGN · DESIGN SYSTEMS",
+    filterCategory: "Product Design" as ProjectCategory,
+    year: "2024",
+    cardBg: "#EDECE8",
+    cardTextColor: "dark" as const,
+    coverImage: "/covers/hp-scale-ui.png",
+    imageConfig: { fit: "contain" as const, position: "center center", bg: "#e8e8e8" },
+    caseStudy: {
+      role: "Interaction Designer",
+      timeline: "2020 — 2024",
+      tools: ["Figma", "Axure", "FigJam", "Scale UI Toolkit", "Jira"],
+      team: "Visual Design, Product CX Architects, UX Writing, Cross-segment design teams",
+      sections: [
+        {
+          type: "text" as const,
+          heading: "Shipped to 56 Million Customers. On a 2.7\u2033 Screen.",
+          body: [
+            "Scale UI is HP's proprietary design system and shared codebase for printer control panels — ensuring design consistency and reducing time to market by reusing code across platforms. The first product built on Scale UI shipped globally as the HP Color LaserJet Pro 4310dw. I shipped multiple printer programs for HP's 56 million customers worldwide.",
+            "As Interaction Designer, I owned design delivery for three key use cases: Print from USB/Network/Source experience, Contacts Management app, and Active Jobs app (Print/Copy/Scan/Fax). My collaborators spanned Visual Design, Product CX Architects, UX Writing teams, and cross-segment design teams. Partners included Scale UI FW Developers, Product Development Firmware, Product Managers, and Design Leadership.",
+          ],
+        },
+        {
+          type: "metrics" as const,
+          items: [
+            { value: "56M", label: "HP customers reached worldwide" },
+            { value: "4", label: "Market segments — Home, SoHo, SMB, Enterprise" },
+            { value: "4", label: "Display sizes from 21\u2033 to 2.7\u2033" },
+            { value: "4\u2605", label: "Rated on PC Mag, Amazon, Digital Trends" },
+          ],
+        },
+        {
+          type: "text" as const,
+          heading: "The Constraints Were the Design",
+          body: [
+            "Scale UI presented four compounding challenges that don't exist in typical software design. First, a myriad of archetypes: printers are used by multiple personas in many contexts — from Ella (Home Consumer) to Joe (SMB IT Admin) to Wen (Small Business Owner). My design files had to deliver a smooth experience for all of them. Second, wide range responsive: printer program teams can use any display size, so every design had to work responsively across XL-L (21\u2033 to 8\u2033), S (4.3\u2033), and XS (2.7\u2033) displays.",
+            "Third, a unified design system: all design output had to fit existing patterns, managing one-off changes and code customization within product timelines. Fourth, segment adherence: a single design file had to incorporate requirements from Home, SoHo, SMB, and Large Format Printing — simultaneously.",
+          ],
+        },
+        {
+          type: "quote" as const,
+          text: "Designing for hardware means your mistakes ship in plastic. There's no hotfix for a bad touchscreen interaction.",
+        },
+        {
+          type: "text" as const,
+          heading: "Task Analysis and Rigorous Delivery",
+          body: [
+            "For each use case, I created task flows and Data Flow Diagrams (DFDs) mapping the happy path and all edge case scenarios. I documented every error case and error handling scenario, then validated the workflow with Subject Matter Experts from both design and development. This wasn't just thoroughness — it was how firmware teams built the product.",
+            "Design delivery followed a set of clear principles: Wide Range Responsive, Detailed, Modular, Cohesive, and Predecessor product compatibility. Each atomic element of the design system trickled responsively from 21\u2033 down to 2.7\u2033 display. I defined Pattern Buildup Tables — documenting every interactive element in every workflow, with verbiage matched to internal code repositories for easier change management. Behavior Tables specified interactive component behavior to reduce manual communication overhead between teams.",
+          ],
+        },
+        {
+          type: "text" as const,
+          heading: "Design Validation in the Lab",
+          body: [
+            "Once development milestones were achieved, I conducted implementation reviews on physical devices and documented issues in Jira to ensure the build matched design to pixel perfection. The Print from USB user journey: Plug in USB → Menu > Print > Print from USB → Browse and choose file → Select copies and print options → Print successful. The Contacts app: Menu > Contacts → View list → Add/edit contacts and groups — all on a resistive touchscreen in a physical office environment.",
+            "The HP Color LaserJet Pro MFP 4301fdw — the first product launched on Scale UI — received 4-star reviews from PC Mag, Amazon, and was named a top pick by Digital Trends. The design system continues to ship across HP's global printer portfolio.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     slug: "hp-learning",
     title: "HP Learning",
     subtitle: "B2C EdTech platform backed by strategic educational partnerships — connecting classrooms to living rooms through printable, hands-on learning.",
     category: "PRODUCT DESIGN · EDTECH",
     filterCategory: "Product Design" as ProjectCategory,
+    year: "2022",
+    cardBg: "#C25B3A",
+    cardTextColor: "light" as const,
     coverImage: "/covers/hp-learning.png",
     imageConfig: { fit: "contain" as const, position: "center center", bg: "#f0ede8" },
     caseStudy: {
@@ -517,62 +633,110 @@ export const projects = [
     },
   },
   {
-    slug: "hp-scale-ui",
-    title: "HP: Scale UI",
-    subtitle: "Designing & shipping printer control panel UX for all HP Printers across market segments & user archetypes.",
-    category: "PRODUCT DESIGN · DESIGN SYSTEMS",
-    filterCategory: "Product Design" as ProjectCategory,
-    coverImage: "/covers/hp-scale-ui.png",
-    imageConfig: { fit: "contain" as const, position: "center center", bg: "#e8e8e8" },
+    slug: "bridgit",
+    title: "Bridgit",
+    subtitle: "AI-powered assistant designed for specialized education teachers.",
+    category: "INCLUSIVE DESIGN RESEARCH",
+    filterCategory: "Research" as ProjectCategory,
+    year: "2025",
+    cardBg: "#1E2E40",
+    cardTextColor: "light" as const,
+    coverImage: "/covers/bridgit.png",
+    imageConfig: { fit: "cover" as const, position: "center center" },
     caseStudy: {
-      role: "Interaction Designer",
-      timeline: "2020 — 2024",
-      tools: ["Figma", "Axure", "FigJam", "Scale UI Toolkit", "Jira"],
-      team: "Visual Design, Product CX Architects, UX Writing, Cross-segment design teams",
+      role: "UX Researcher & Interaction Designer",
+      timeline: "16 weeks — Microsoft EES × Parsons",
+      tools: ["Figma", "Miro", "Semi-structured Interviews", "Affinity Mapping", "Participatory Design"],
+      team: "4 designers (Microsoft External Engagement Studio × Parsons School of Design)",
       sections: [
         {
           type: "text" as const,
-          heading: "Shipped to 56 Million Customers. On a 2.7″ Screen.",
+          heading: "No One Was Building for the Specialists",
           body: [
-            "Scale UI is HP's proprietary design system and shared codebase for printer control panels — ensuring design consistency and reducing time to market by reusing code across platforms. The first product built on Scale UI shipped globally as the HP Color LaserJet Pro 4310dw. I shipped multiple printer programs for HP's 56 million customers worldwide.",
-            "As Interaction Designer, I owned design delivery for three key use cases: Print from USB/Network/Source experience, Contacts Management app, and Active Jobs app (Print/Copy/Scan/Fax). My collaborators spanned Visual Design, Product CX Architects, UX Writing teams, and cross-segment design teams. Partners included Scale UI FW Developers, Product Development Firmware, Product Managers, and Design Leadership.",
+            "Specialized education teachers — ESL instructors, speech pathologists, reading intervention specialists — manage their own schedules across multiple classrooms, write individualized plans for every student, and coordinate through hallway conversations and after-hours texts. No AI tool on the market was built for how they actually work. Bridgit changed that.",
+            "Over 16 weeks with Microsoft's External Engagement Studio at Parsons, I worked with a team of four to go from a deliberately open brief — 'How might we empower under-represented communities through AI?' — to a validated product direction grounded in seven interviews, seven literature reviews, and six participatory design sessions across three co-design rounds.",
           ],
         },
         {
           type: "metrics" as const,
           items: [
-            { value: "56M", label: "HP customers reached worldwide" },
-            { value: "4", label: "Market segments — Home, SoHo, SMB, Enterprise" },
-            { value: "4", label: "Display sizes from 21\" to 2.7\"" },
-            { value: "4★", label: "Rated on PC Mag, Amazon, Digital Trends" },
+            { value: "7", label: "Semi-structured interviews across 5 stakeholder groups" },
+            { value: "7", label: "Literature papers reviewed" },
+            { value: "6", label: "Co-design sessions across 3 rounds" },
+            { value: "3", label: "Major research pivots" },
           ],
         },
         {
           type: "text" as const,
-          heading: "The Constraints Were the Design",
+          heading: "Open Brief, Documented Assumptions",
           body: [
-            "Scale UI presented four compounding challenges that don't exist in typical software design. First, a myriad of archetypes: printers are used by multiple personas in many contexts — from Ella (Home Consumer) to Joe (SMB IT Admin) to Wen (Small Business Owner). My design files had to deliver a smooth experience for all of them. Second, wide range responsive: printer program teams can use any display size, so every design had to work responsively across XL-L (21\" to 8\"), S (4.3\"), and XS (2.7\") displays.",
-            "Third, a unified design system: all design output had to fit existing patterns, managing one-off changes and code customization within product timelines. Fourth, segment adherence: a single design file had to incorporate requirements from Home, SoHo, SMB, and Large Format Printing — simultaneously.",
+            "Microsoft gave us no target user, no domain, no constraints. Our team gravitated toward education — specifically, AI's role in elementary learning. Before any fieldwork, we logged six assumptions: 'AI will replace teachers,' 'Parents are nervous about AI,' 'Learning with AI is better than without.' Most turned out to be incomplete.",
+            "We scoped a mixed-methods study: literature review across seven papers, semi-structured interviews with seven participants spanning teachers, specialists, administrators, and parents, and three rounds of co-design workshops. The semi-structured format was deliberate — we didn't yet know which threads would matter most.",
+          ],
+        },
+        {
+          type: "text" as const,
+          heading: "The Same Bottleneck, Every Interview",
+          body: [
+            "Seven interviews. Four recurring patterns. Administrative overload: Meher, a speech pathologist, spends more time making her schedule than working with students. Broken parent communication: Olivia described texting, emailing, calling, and sending backpack notes to a parent and still getting no response. Technology adopted without support: Stephanie, 42 years in the classroom, recounted getting Apple computers with no training — 'nobody knew how to turn them on.' And foundational skills being sacrificed to screen time.",
+            "Three of seven literature papers had already flagged the same signal: implementation challenges in AI education sit overwhelmingly with teachers — not students, not parents. The interviews confirmed it from every direction.",
           ],
         },
         {
           type: "quote" as const,
-          text: "Designing for hardware means your mistakes ship in plastic. There's no hotfix for a bad touchscreen interaction.",
+          text: "I might need to text, email, put a note in the backpack, and call home and I still won't hear anything.",
+          attribution: "Olivia, classroom teacher — on parent communication",
         },
         {
           type: "text" as const,
-          heading: "Task Analysis and Rigorous Delivery",
+          heading: "Three Pivots",
           body: [
-            "For each use case, I created task flows and Data Flow Diagrams (DFDs) mapping the happy path and all edge case scenarios. I documented every error case and error handling scenario, then validated the workflow with Subject Matter Experts from both design and development. This wasn't just thoroughness — it was how firmware teams built the product.",
-            "Design delivery followed a set of clear principles: Wide Range Responsive, Detailed, Modular, Cohesive, and Predecessor product compatibility. Each atomic element of the design system trickled responsively from 21\" down to 2.7\" display. I defined Pattern Buildup Tables — documenting every interactive element in every workflow, with verbiage matched to internal code repositories for easier change management. Behavior Tables specified interactive component behavior to reduce manual communication overhead between teams.",
+            "The research took three significant turns. The first came after interviews: we'd started centered on children. Every participant — regardless of role — pointed to teacher burden as the systemic bottleneck. We reframed the entire project around educators. The second pivot happened in co-design Round 2, when Meher and Stephanie revealed that specialist teachers experience every pain point at higher intensity than general classroom teachers — fragmented schedules across multiple classrooms, per-student documentation, and the lowest priority in school-wide scheduling. Competitive analysis confirmed no product addressed their workflow: Magic School, Brisk, and ClassDojo all target general classrooms.",
+            "The third pivot shaped the interaction model. Concept validation showed that specialists don't work in isolated tasks — they move through continuous rhythms of sessions, transitions, disruptions, and documentation. A tool offering discrete features would add fragmentation. Bridgit's AI became proactive rather than reactive: surfacing schedule disruptions, drafting session summaries, proposing make-up slots, and generating parent communications without being prompted.",
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            { src: "/casestudy/bridgit/dashboard.png", alt: "Bridgit dashboard with proactive AI assistant and daily overview", caption: "The dashboard surfaces the day's schedule, student alerts, and AI-generated tasks at a glance." },
+            { src: "/casestudy/bridgit/dashboard-absence.png", alt: "Bridgit handling an absent student with AI-suggested rescheduling", caption: "When a student is absent, Bridgit proactively suggests make-up slots — no manual scheduling required." },
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            { src: "/casestudy/bridgit/schedule.png", alt: "Bridgit weekly calendar view with color-coded sessions", caption: "Color-coded by student and session type — designed for specialists who need to scan their day in seconds." },
+            { src: "/casestudy/bridgit/schedule-ai.png", alt: "AI-suggested session slots for rescheduling", caption: "AI-generated make-up slot recommendations, validated in concept testing as a top-priority feature." },
           ],
         },
         {
           type: "text" as const,
-          heading: "Design Validation in the Lab",
+          heading: "From Research to Product",
           body: [
-            "Once development milestones were achieved, I conducted implementation reviews on physical devices and documented issues in Jira to ensure the build matched design to pixel perfection. The Print from USB user journey: Plug in USB → Menu > Print > Print from USB → Browse and choose file → Select copies and print options → Print successful. The Contacts app: Menu > Contacts → View list → Add/edit contacts and groups — all on a resistive touchscreen in a physical office environment.",
-            "The HP Color LaserJet Pro MFP 4301fdw — the first product launched on Scale UI — received 4-star reviews from PC Mag, Amazon, and was named a top pick by Digital Trends. The design system continues to ship across HP's global printer portfolio.",
+            "The traceability between research and product was explicit. Color-coded scheduling came from concept validation: 'simple UI, color-coding needed — I'm moving between classrooms all day.' Proactive absence handling came from workshop data showing specialist schedules are highly prone to disruption. Structured note import came from Meher's finding that documentation consumes more time than instruction. Specialist-to-teacher messaging was validated as the single highest-value feature across all three co-design rounds.",
+            "Nothing in Bridgit exists because it seemed like a good idea. It exists because someone told us they needed it.",
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            { src: "/casestudy/bridgit/import-notes.png", alt: "Structured note import interface for session documentation", caption: "Structured note import — Meher's documentation burden translated directly into a core feature." },
+            { src: "/casestudy/bridgit/personalize.png", alt: "AI-generated personalization strategies per student", caption: "One-click personalization: AI surfaces activity guides and strategies tailored to each student's profile." },
+          ],
+        },
+        {
+          type: "two-images" as const,
+          images: [
+            { src: "/casestudy/bridgit/session-page.png", alt: "Session page with AI-drafted session summary", caption: "AI drafts the session summary — the specialist reviews and approves, rather than writing from scratch." },
+            { src: "/casestudy/bridgit/bulk-sending.png", alt: "AI-drafted parent communication templates for bulk sending", caption: "Parent communication templates drafted by AI — addressing Olivia's multi-channel outreach problem directly." },
+          ],
+        },
+        {
+          type: "text" as const,
+          heading: "Reflection",
+          body: [
+            "Documenting assumptions before fieldwork created accountability — we couldn't rationalize around findings that contradicted our starting point. Shifting from generative to participatory methods at the right moment maintained momentum and gave participants ownership of the solution direction.",
+            "What I'd strengthen: observational shadowing to watch specialists through their actual day, longer usability testing cycles in-context, and time-motion baselines to quantify administrative burden in hours rather than themes. The qualitative evidence was strong. The quantitative case had room to grow.",
           ],
         },
       ],
@@ -584,6 +748,9 @@ export const projects = [
     subtitle: "1st Place — Rotman Design Challenge. Reimagining traditional insurance structures to enable security and trust for gig workers using AI-enabled CX experiences.",
     category: "STRATEGY · AI CUSTOMER EXPERIENCE",
     filterCategory: "Strategy" as ProjectCategory,
+    year: "2024",
+    cardBg: "#FAFAF7",
+    cardTextColor: "dark" as const,
     coverImage: "/covers/flexible-insurance.jpg",
     imageConfig: { fit: "cover" as const, position: "center center" },
     caseStudy: {
@@ -614,307 +781,6 @@ export const projects = [
           body: [
             "Won first place against 20+ competing teams. The judges highlighted our approach to behavioral trust-building and the AI-driven personalization model as key differentiators. The concept was later developed into a more detailed strategy proposal.",
           ],
-        },
-      ],
-    },
-  },
-  {
-    slug: "project-sense",
-    title: "Project SENSE",
-    subtitle: "Pharmaceutical data visualization and analytics platform for predicting delays in clinical trial timelines — enabling decision makers to pivot before problems escalate.",
-    category: "PRODUCT DESIGN · DATA VISUALIZATION",
-    filterCategory: "Product Design" as ProjectCategory,
-    coverImage: "/covers/project-sense.png",
-    imageConfig: { fit: "cover" as const, position: "center 30%" },
-    caseStudy: {
-      role: "Interaction & Visual Designer",
-      timeline: "2018 — 2019 (10 months)",
-      tools: ["Sketch", "InVision", "Axure", "Participatory Design", "Experience Mapping"],
-      team: "Solo designer embedded with client-side design manager, data science, and engineering",
-      sections: [
-        {
-          type: "text" as const,
-          heading: "Predicting Failure Before It Happens",
-          body: [
-            "Clinical trials last 5 to 8 years on average. They're highly volatile, massively complex, and when they fall behind schedule — even by weeks — the cost can run into hundreds of millions of dollars. The client conducts clinical trials to test newly developed drug compounds. SENSE is the deep analytics tool that gives their Clinical Trial Leadership the ability to predict delays and risks in the trial process before they become crises.",
-            "As the only designer from Accenture's studio on this project, I led end-to-end UX design strategy and execution over 10 months. I was the Interaction and Visual Designer, working directly with the client-side design manager. The design process followed a structured five-phase approach: Discover (Requirement Gathering) → Describe (Initial Concept, Iteration Cycle) → Design (Visual Design) → Develop (Feasibility Check, Final User Review) → Release (Launch).",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/casestudy/project-sense/dashboard.png",
-          alt: "SENSE Portfolio Summary dashboard showing clinical trial analytics",
-          caption: "The SENSE Portfolio Summary: Patient & Site Status, Study Overview radial, Milestone Spotlight, Enrollment, Costs, Objectives — all on one canvas.",
-        },
-        {
-          type: "text" as const,
-          heading: "Discovery: A Two-Day Co-Creation Workshop",
-          body: [
-            "The project kicked off with a two-day co-creation workshop with stakeholders and potential users of the SENSE platform. I employed Participatory Design methods and Experience Mapping exercises to understand the existing customer experience from the inside out.",
-            "After the workshop, we extracted latent primary needs across all user roles. Most shared four needs: Predict (accurately predict risks and delays in time to proactively pivot the schedule), Analyze (trace source data and interdependencies between processes), Notify (receive important alerts in an actionable format), and Share (invite collaboration and use external tools when required). These four verbs became the product's design north star.",
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "Three Archetypes. One Tool.",
-          body: [
-            "SENSE served three distinct user archetypes with fundamentally different needs. Global Trial Directors manage a single clinical trial through to completion — involved for more than five years on average, focused at the granular study level. Trial Forecasting Managers oversee cost expenditure and resource allocation across multiple trials simultaneously, accountable for distribution across portfolios, projects, and studies. Global Portfolio Directors are senior leadership managing 10 to 50 studies — they need portfolio-level macro status at a glance, not drill-down detail.",
-            "The information architecture solved this by structuring SENSE around two parallel hierarchies: Study View (Portfolio → Project → Study) and Geographical View (Global → Regional → Country → Site). A Global Portfolio Director could see worldwide data while a Regional Trial Lead drilled into a specific EMEA study — same tool, same interface, different altitude.",
-          ],
-        },
-        {
-          type: "quote" as const,
-          text: "A prediction is only valuable if the person reading it knows what to do next.",
-        },
-        {
-          type: "text" as const,
-          heading: "Designing the Dashboard",
-          body: [
-            "The primary user flow was: select a study from a portfolio → deep dive into a process → zoom from global to site-level data. The Portfolio Summary dashboard surfaces Patient & Site Status (global map view), Study Overview (radial risk visualization), Milestone Spotlight, Enrollment trends, External Cost Forecast, Objectives, and Summary Statistics — 80 total studies, 1,563 target patients, $325M total lifetime external cost — all in a single canvas.",
-            "Every visualization was designed for the dark-theme interface that clinical leadership teams use in low-light environments. The radial Study Overview visualization was the centrepiece: it made risk visible at a glance — High Risk in red, Medium Risk in amber, On Track in green — so a director could understand the health of their entire portfolio before their morning coffee.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/casestudy/project-sense/cover.png",
-          alt: "SENSE platform overview",
-          caption: "SENSE: analytics and data visualization for clinical trial leadership at Accenture.",
-        },
-        {
-          type: "text" as const,
-          heading: "From Reactive to Proactive",
-          body: [
-            "Before SENSE, clinical trial leadership operated reactively — firefighting delays as they emerged. SENSE shifted the posture to proactive pivoting: the tool surfaces at-risk studies weeks before scheduled milestones, giving leadership time to reallocate resources, adjust timelines, or escalate decisions before costs compound.",
-            "The tool was deployed for Accenture's clinical trial consulting engagements. The walkthrough video demonstrates the full user journey — from portfolio overview through study drill-down to site-level data — a roughly four-minute flow that captures the depth of the analytical capability the interface unlocked.",
-          ],
-        },
-      ],
-    },
-  },
-  {
-    slug: "loop-strategy",
-    title: "Loop : Strategy",
-    subtitle: "Solving the problem of ghosting, Loop is an AI intelligence layer that autonomously manages rejection conversations for recruiters.",
-    category: "PRODUCT DESIGN · STRATEGY · AI PRODUCT",
-    filterCategory: "Product Design" as ProjectCategory,
-    coverImage: "/covers/loop-strategy.png",
-    imageConfig: { fit: "contain" as const, position: "center center", bg: "#faf9f7" },
-    caseStudy: {
-      role: "Product Designer & Strategist",
-      timeline: "Oct — Dec 2024",
-      tools: ["Figma", "Claude API", "Business Model Canvas", "User Interviews"],
-      team: "2 designers + 1 engineer",
-      sections: [
-        {
-          type: "text" as const,
-          heading: "Overview",
-          body: [
-            "Ghosting is recruiting's dirty secret. Recruiters handle hundreds of candidates simultaneously, and the ones who don't get the job simply... never hear back. Loop is an AI intelligence layer that autonomously manages rejection conversations — turning the worst part of recruiting into a relationship-building opportunity.",
-            "I led the product strategy and interaction design, defining the AI's conversational tone, the recruiter's control surface, and the candidate experience. The core design challenge was making automated rejection feel genuinely human and constructive.",
-          ],
-        },
-        {
-          type: "metrics" as const,
-          items: [
-            { value: "85%", label: "Of candidates preferred Loop rejection over silence" },
-            { value: "3x", label: "Faster closure on open candidate loops" },
-            { value: "60%", label: "Reduction in recruiter time on rejection tasks" },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "Outcome",
-          body: [
-            "Loop demonstrated that AI can handle sensitive human conversations when designed with empathy as a constraint, not an afterthought. The prototype was validated with 3 recruiting teams and is being developed further as a standalone product.",
-          ],
-        },
-      ],
-    },
-  },
-  {
-    slug: "beyond-efficiency",
-    title: "Beyond Efficiency: Understanding the Paradox of AI in Hiring",
-    subtitle: "A design research capstone investigating how automation and AI have created a paradox — employers drown in high-volume, low-relevance applications while qualified candidates are systematically excluded.",
-    category: "DESIGN RESEARCH",
-    filterCategory: "Research" as ProjectCategory,
-    coverImage: "/covers/beyond-efficiency.png",
-    imageConfig: { fit: "cover" as const, position: "center 75%" },
-    caseStudy: {
-      role: "Lead Researcher & Designer",
-      timeline: "Fall 2025",
-      tools: ["DARN Framework", "Focus Groups", "Employer Interviews", "Candidate Surveys", "Thematic Analysis", "Figma"],
-      team: "Yash Sonwaney & Ananya (Parsons Design Research Capstone)",
-      sections: [
-        {
-          type: "text" as const,
-          heading: "The Paradox of Efficiency",
-          body: [
-            "Tech hiring promised to get better with AI. Instead, it created a paradox. Employers face an overwhelming flood of applications — many AI-generated — and can't identify the right candidates. Candidates submit hundreds of applications into black-box systems and hear nothing back. Both sides are more frustrated than ever, even as the tools supposedly optimizing the process multiply.",
-            "This research project set out to understand that contradiction. Using a multi-method approach, we mapped the hiring ecosystem from both sides — candidate and employer — to identify where the system breaks down, who bears the cost, and how design might intervene.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/hypothesis.png",
-          alt: "Research hypothesis: the paradox of efficiency in AI-driven hiring",
-          caption: "The central hypothesis — automation creates high volume but low relevance for employers, while qualified candidates are filtered out.",
-        },
-        {
-          type: "metrics" as const,
-          items: [
-            { value: "92%", label: "Of candidates don't trust AI to be fair in hiring" },
-            { value: "61%", label: "Of candidates are ghosted even after an interview" },
-            { value: "30–50%", label: "Increase in applications in 24 months due to AI-generated resumes" },
-            { value: "53%", label: "Of recruiters report burnout from high volumes of low-quality applications" },
-            { value: "$180K", label: "Average cost of a bad hire for a mid-level tech role" },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "Research Questions",
-          body: [
-            "Three questions oriented our inquiry. First: how has AI reshaped hiring, and where do inequities emerge for both candidates and employers? Second: how have AI hiring tools changed how recruiters and hiring managers actually work and make decisions — day to day, not in the abstract? Third: how are candidates adapting to the opacity, ghosting, and systemic inequities baked into modern hiring?",
-            "These questions were deliberately held together rather than treated separately. The hiring system is relational — understanding the candidate experience required understanding the recruiter experience, and vice versa.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/research-questions.png",
-          alt: "Three research questions guiding the inquiry",
-          caption: "Our three research questions — held together as a relational system, not separate tracks.",
-        },
-        {
-          type: "text" as const,
-          heading: "Research Methods",
-          body: [
-            "We used a mixed-methods approach combining primary and secondary research. On the primary side: in-depth interviews with recruiters and hiring managers, a candidate survey with 51 responses, and focus group discussions with candidates navigating active job searches.",
-            "Secondary research included a literature review of bias and automation research, social media scans of communities where candidates discuss hiring tactics (Reddit, Blind, LinkedIn), and industry market reports from Greenhouse, Joveo, and The Planet Group.",
-            "To map the system as a whole, we applied the D-A-R-N framework — Devices, Actors, Representations, Networks — a strategic design method that surfaces the material and social infrastructure underpinning a market. This helped us see how ATS platforms, AI scoring algorithms, LinkedIn Recruiter, candidate resumes, and job descriptions interact as a system, not just as individual tools.",
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            {
-              src: "/case-studies/beyond-efficiency/research-methods.png",
-              alt: "Primary and secondary research methods overview",
-              caption: "Mixed-method approach: employer interviews, 51-response candidate survey, focus groups, literature review.",
-            },
-            {
-              src: "/case-studies/beyond-efficiency/darn-map.png",
-              alt: "D-A-R-N system map of the hiring ecosystem",
-              caption: "The D-A-R-N map — Devices, Actors, Representations, Networks — surfacing the hiring system's full infrastructure.",
-            },
-          ],
-        },
-        {
-          type: "text" as const,
-          heading: "The ATS Pipeline & Where AI Enters",
-          body: [
-            "Most candidates interact with a 7-stage hiring pipeline: job posting, resume submission, AI-powered skill extraction, machine learning ranking by fit score, recruiter review and shortlisting, interview coordination, and final decision. AI is most densely concentrated in stages 3 and 4 — extracting qualifications and ranking candidates before any human sees the application.",
-            "What looks like a clean pipeline obscures the reality: recruiters told us that most of their work is still manual, concentrated at the stages where AI is supposed to help most. One recruiter described spending an entire week on a single role that received over a thousand applications. The AI had filtered — but the shortlist it produced still required significant human judgment to evaluate.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/ats-workflow.png",
-          alt: "7-stage ATS workflow showing where AI is densely integrated, integrated, or only assisting",
-          caption: "The 7-stage ATS pipeline — stages 3 and 4 have the densest AI involvement, yet recruiters report those stages still demand heavy manual effort.",
-        },
-        {
-          type: "quote" as const,
-          text: "It's not the rejection that hurts — it's sitting in that grey area, not knowing if any human ever even saw my application.",
-          attribution: "Candidate, Focus Group Discussion",
-        },
-        {
-          type: "text" as const,
-          heading: "What Candidates Are Experiencing",
-          body: [
-            "Candidates described a hiring process defined by opacity and asymmetry. Applications disappear into ATS systems with no feedback. The rise of AI-generated resumes has made keyword optimization feel mandatory, pushing candidates to game systems rather than communicate their actual experience. 61% reported being ghosted after completing an interview — a stage where candidates have already invested significant time and emotional energy.",
-            "The 92% distrust figure for AI fairness wasn't cynicism — it reflected lived experience. Candidates who optimized their resumes by mirroring job description language reported better response rates, regardless of underlying fit. The system rewards pattern-matching over capability, and candidates know it.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/candidate-journey.png",
-          alt: "Candidate journey map showing emotional states from awareness through offer stage",
-          caption: "The candidate journey — moving from overwhelmed and unsure at awareness, to strained during preparation, to guarded hope through screening, with relief only at offer.",
-        },
-        {
-          type: "quote" as const,
-          text: "Recruitment is still very manual. One role had over a thousand applications and I spent an entire week just going through them.",
-          attribution: "Recruiter P002, Employer Interview",
-        },
-        {
-          type: "text" as const,
-          heading: "What Employers Are Experiencing",
-          body: [
-            "Recruiters and hiring managers described being overwhelmed, not empowered. AI hiring tools have increased application volume dramatically but haven't solved the quality problem. 53% of recruiters reported burnout from reviewing high volumes of low-quality, often AI-generated applications.",
-            "A new category of problem emerged: fraud. 17% of hiring managers reported interviewing a deepfake candidate — a sign that AI-generated applications are no longer just keyword-stuffed resumes but increasingly fabricated identities. The most consistent AI use case recruiters actually valued wasn't ranking or scoring — it was detecting fake profiles at the top of the funnel.",
-            "The best candidates, multiple recruiters noted, still come from outbound sourcing via LinkedIn Recruiter — a manual process. The tools meant to automate inbound hiring haven't replaced the human judgment required to identify genuine fit.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/employer-journey.png",
-          alt: "Employer journey map showing emotional states from awareness through decision-making",
-          caption: "The employer journey — alert at job posting, hopeful at inflow, then overloaded, stressed, and cautious as volume overwhelms the process.",
-        },
-        {
-          type: "text" as const,
-          heading: "Candidate Needs",
-          body: [
-            "Synthesis across survey responses and focus group sessions identified four core needs. First, trust through fair evaluation — candidates want to know the criteria for assessment and that those criteria apply consistently regardless of identity markers. Second, closure over silence — rejection is acceptable; disappearing without response is not. Third, protection from burnout — the process of applying to dozens of roles weekly, reformatting materials per ATS, and managing uncertainty is exhausting. Fourth, agency in a system that feels rigged — candidates want the process to feel like a two-way assessment, not an opaque filter.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/candidate-needs.png",
-          alt: "Four synthesized candidate needs: Trust, Closure, Protection from Burnout, Restored Agency",
-          caption: "Four candidate needs synthesized from surveys and focus groups — trust, closure, burnout protection, and restored agency.",
-        },
-        {
-          type: "text" as const,
-          heading: "Employer Needs",
-          body: [
-            "Employers surfaced four parallel needs. First, identifying authentic candidates — separating real, qualified humans from AI-generated applications has become a primary concern. Second, managing application volume — the volume problem isn't solved by existing AI tools; it has been created, in part, by them. Third, closing communication gaps — ghosting persists not because recruiters are indifferent but because the process is so manual that communication falls through. Fourth, technology as a cognitive offloader — recruiters want AI to handle the mechanical parts of the process so they can invest judgment in evaluation and relationship-building.",
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/employer-needs.png",
-          alt: "Four synthesized employer needs: Authentic Candidates, Volume Management, Communication Gaps, Cognitive Offloading",
-          caption: "Four employer needs synthesized from recruiter and hiring manager interviews — authenticity, volume, communication, and cognitive offloading.",
-        },
-        {
-          type: "text" as const,
-          heading: "Opportunity & Direction",
-          body: [
-            "The research converged on a single reframe: the opportunity isn't to make hiring faster, it's to make it more legible for everyone involved. The question we carried into concept development was: how might we rebalance AI in tech hiring to reduce recruiter overload while making qualified candidates more visible?",
-            "The theory of change we developed positioned technology as a cognitive offloader — handling mechanical tasks so humans can focus on what requires judgment. In practice, this means less manual processing of applications leads to deeper evaluation of fit, which enables more consistent candidate communication, which attracts more engaged and higher-quality candidates. It's a compounding loop, not a one-time fix.",
-            "Our first concept direction was Loop: an AI candidate communication agent that keeps every candidate informed without recruiters having to send a single email themselves. Loop addresses the most emotionally costly part of the hiring process — ghosting — while freeing recruiter bandwidth for higher-value work. Prototyping and testing is underway in Spring 2026.",
-          ],
-        },
-        {
-          type: "two-images" as const,
-          images: [
-            {
-              src: "/case-studies/beyond-efficiency/opportunity-statement.png",
-              alt: "How might we rebalance AI in tech hiring",
-              caption: "The opportunity statement reframing the challenge from speed to legibility.",
-            },
-            {
-              src: "/case-studies/beyond-efficiency/theory-of-change.png",
-              alt: "Theory of change: technology as cognitive offloader leading to better hiring outcomes",
-              caption: "The theory of change — cognitive offloading cascades into deeper evaluation, consistent communication, and better candidate quality.",
-            },
-          ],
-        },
-        {
-          type: "image" as const,
-          src: "/case-studies/beyond-efficiency/loop-concept.png",
-          alt: "Loop: Candidate Communication Agent concept — keeping every candidate in the loop without sending a single email",
-          caption: "Concept I: Loop — an AI communication agent that eliminates ghosting by keeping every candidate informed, automatically.",
         },
       ],
     },

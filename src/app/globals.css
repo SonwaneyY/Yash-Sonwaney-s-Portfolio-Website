@@ -3,54 +3,53 @@
    ============================================ */
 
 :root {
-  /* Colors — warm neutrals, no pure white/black */
-  --bg-primary: #FAFAF7;
-  --bg-secondary: #F2F0EB;
-  --bg-tertiary: #E8E5DE;
-  --text-primary: #1A1A18;
-  --text-secondary: #6B6960;
-  --text-tertiary: #A09E96;
-  --accent: #C25B3A;
-  --border: #E0DED8;
+  /* Field / dark canvas */
+  --bg-primary:    #0E0D0B;
+  --bg-secondary:  #161512;
+  --bg-tertiary:   #1E1C19;
+
+  /* Paper / text */
+  --text-primary:   #EEE8DC;
+  --text-secondary: #8A857A;   /* ~5.7:1 on --bg-primary ✓ */
+  --text-tertiary:  #7E7B78;   /* ~4.8:1 on --bg-primary ✓ (was #4A4742, failed at 2.4:1) */
+
+  /* Single accent — deep ember */
+  --accent: #C4502A;
+
+  /* Rules — barely visible against field */
+  --border: #2A2824;
+  --rule:   #2A2824;
 
   /* Typography */
   --font-serif: var(--font-scotch-display), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-general-sans), -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-sans:  var(--font-general-sans), -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono:  var(--font-jetbrains-mono), 'JetBrains Mono', 'Courier New', monospace;
 
   /* Spacing — 8px base */
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-5: 40px;
-  --space-6: 48px;
-  --space-8: 64px;
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-8:  64px;
   --space-10: 80px;
   --space-12: 96px;
   --space-15: 120px;
 
   /* Layout */
-  --max-width: 1200px;
+  --max-width:     1200px;
   --content-width: 680px;
 
-  /* Container padding — single source of truth, consumed by Container + any full-bleed sections */
+  /* Container padding */
   --container-pad: 20px;
 
-  /* Transition for theme switch */
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-
-/* Responsive container padding — update here, propagates everywhere */
-@media (min-width: 768px) {
-  :root { --container-pad: 40px; }
-}
-@media (min-width: 1024px) {
-  :root { --container-pad: 80px; }
-}
-@media (min-width: 1440px) {
-  :root { --container-pad: 120px; }
-}
+@media (min-width: 768px)  { :root { --container-pad: 40px; } }
+@media (min-width: 1024px) { :root { --container-pad: 80px; } }
+@media (min-width: 1440px) { :root { --container-pad: 120px; } }
 
 /* ============================================
    RESET
@@ -81,16 +80,24 @@ body {
   min-height: 100vh;
 }
 
+/* Grain overlay — feel it before you see it */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
 ::selection {
   background-color: var(--accent);
   color: var(--bg-primary);
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
+img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
 }
@@ -108,9 +115,7 @@ button {
   cursor: pointer;
 }
 
-ul, ol {
-  list-style: none;
-}
+ul, ol { list-style: none; }
 
 /* ============================================
    BASE TYPOGRAPHY
@@ -119,7 +124,7 @@ ul, ol {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 p {
@@ -131,11 +136,8 @@ p {
    ACCESSIBILITY
    ============================================ */
 
-/* Respect user motion preferences (WCAG 2.1 AA) */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -143,22 +145,44 @@ p {
   }
 }
 
-/* Keyboard focus indicator */
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 4px;
   border-radius: 2px;
 }
 
+/* Skip navigation link — visually hidden until focused */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--container-pad);
+  z-index: 9998;
+  padding: 10px 20px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: none;
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+  outline: 2px solid var(--accent);
+}
+
 /* ============================================
-   UTILITY CLASSES
+   UTILITY
    ============================================ */
 
 .meta-label {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
@@ -176,7 +200,7 @@ p {
 }
 
 /* ============================================
-   INTRO STATE — hide header during loading
+   INTRO STATE
    ============================================ */
 
 body.intro-active header {

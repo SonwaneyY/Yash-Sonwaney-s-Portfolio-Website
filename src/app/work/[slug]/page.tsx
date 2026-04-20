@@ -28,7 +28,7 @@ function SectionRenderer({ section }: { section: CaseStudySection }) {
           <div id={headingToId(section.heading)} className={styles.textSection}>
             <h2 className={styles.textHeading}>{section.heading}</h2>
             {section.body.map((p, i) => (
-              <p key={i} className={styles.textBody}>{p}</p>
+              <p key={i} className={i === 0 ? styles.textBodyLead : styles.textBody}>{p}</p>
             ))}
           </div>
         </ScrollReveal>
@@ -85,6 +85,50 @@ function SectionRenderer({ section }: { section: CaseStudySection }) {
               </cite>
             )}
           </blockquote>
+        </ScrollReveal>
+      );
+
+    case "pull-quote":
+      return (
+        <ScrollReveal>
+          <blockquote className={styles.pullQuote}>
+            <p className={styles.pullQuoteText}>&ldquo;{section.text}&rdquo;</p>
+            {section.attribution && (
+              <cite className={styles.pullQuoteAttribution}>
+                &mdash; {section.attribution}
+              </cite>
+            )}
+          </blockquote>
+        </ScrollReveal>
+      );
+
+    case "callout":
+      return (
+        <ScrollReveal>
+          <div className={styles.callout}>
+            <span className={styles.calloutLabel}>{section.label}</span>
+            {section.body.map((p, i) => (
+              <p key={i} className={styles.calloutBody}>{p}</p>
+            ))}
+          </div>
+        </ScrollReveal>
+      );
+
+    case "steps":
+      return (
+        <ScrollReveal>
+          <div className={styles.steps}>
+            {section.title && <span className={styles.stepsTitle}>{section.title}</span>}
+            {section.items.map((item, i) => (
+              <div key={i} className={styles.step}>
+                <span className={styles.stepNum}>{item.num}</span>
+                <div className={styles.stepContent}>
+                  <span className={styles.stepLabel}>{item.label}</span>
+                  {item.body && <p className={styles.stepBody}>{item.body}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
         </ScrollReveal>
       );
 

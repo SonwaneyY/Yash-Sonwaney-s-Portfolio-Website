@@ -1,7 +1,7 @@
 .experienceStrip {
   padding: var(--space-8) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .experienceGrid {
@@ -26,9 +26,8 @@
 @media (min-width: 768px) {
   .experienceItem {
     padding-right: var(--space-3);
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--rule);
   }
-
   .experienceItem:last-child {
     border-right: none;
   }
@@ -36,10 +35,11 @@
 
 .experienceLogo {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: var(--bg-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background-color: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,20 +47,21 @@
 }
 
 .logoImg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
 .experienceText {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .experienceCompany {
-  font-family: var(--font-serif);
-  font-size: 17px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.2;
 }
@@ -72,9 +73,9 @@
 }
 
 .experienceYear {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-tertiary);

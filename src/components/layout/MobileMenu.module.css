@@ -5,40 +5,44 @@
   background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 0 var(--container-pad);
 }
 
 .closeButton {
   position: absolute;
   top: var(--space-3);
-  right: 20px;
+  right: var(--container-pad);
   padding: 8px;
-  font-family: var(--font-sans);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-tertiary);
-  transition: color 200ms ease;
+  transition: color 400ms ease;
 }
 
 .closeButton:hover {
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
+  align-items: flex-start;
+  gap: var(--space-4);
 }
 
 .navLink {
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: clamp(32px, 8vw, 56px);
   font-weight: 400;
-  color: var(--text-primary);
-  transition: color 200ms ease;
+  color: var(--text-secondary);
+  transition: color 400ms ease;
+  line-height: 1.1;
 }
 
 .navLink:hover {
-  color: var(--accent);
+  color: var(--text-primary);
 }

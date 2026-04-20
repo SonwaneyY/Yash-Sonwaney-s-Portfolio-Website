@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/ui/SmoothScroll";
@@ -25,6 +26,13 @@ const generalSans = localFont({
   display: "swap",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Yash Sonwaney — Product Designer",
   description:
@@ -39,12 +47,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${scotchText.variable} ${generalSans.variable}`}
+      className={`${scotchText.variable} ${generalSans.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <SmoothScroll />
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

@@ -1,127 +1,73 @@
 .section {
-  padding-top: var(--space-15); /* extra top breathing room — distinct from hero */
+  padding-top: var(--space-15);
+  padding-bottom: var(--space-15);
 }
 
-/* ---- "What are you looking for?" — scrolls away ---- */
-.filterLabel {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 400;
-  color: var(--text-primary);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0 0 var(--space-3);
-}
-
-/* ---- Sticky viewport — pins while scrollDriver scrolls ---- */
-.stickyViewport {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+/* ---- Section marker ---- */
+.sectionMarker {
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--bg-primary);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-5);
 }
 
-/* ---- Only pills are sticky ---- */
-.stickyFilter {
-  flex-shrink: 0;
-  padding: var(--space-4) 0;
-  background: var(--bg-primary);
-  z-index: 10;
+.markerNum {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
 }
 
-/* ---- Pill tab bar ---- */
-.tabBar {
+.markerLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ---- Filter bar ---- */
+.filterBar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
+  margin-bottom: var(--space-4);
 }
 
-.pill {
+.filterBtn {
   all: unset;
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
-  padding: 9px 20px;
+  padding: 7px 16px;
   border-radius: 9999px;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
+  border: 1px solid var(--rule);
+  color: var(--text-tertiary);
   background: transparent;
-  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  transition: border-color 400ms ease, color 400ms ease;
 }
 
-.pill[data-active="true"] {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: var(--text-primary);
-}
-
-.pill[data-category="Product Design"]:not([data-active="true"]) {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.pill[data-category="Strategy"]:not([data-active="true"]) {
-  color: var(--text-secondary);
+.filterBtn[data-active="true"] {
   border-color: var(--text-secondary);
-}
-
-.pill[data-category="Research"]:not([data-active="true"]) {
   color: var(--text-primary);
-  border-color: var(--text-primary);
 }
 
-.pill:not([data-active="true"]):hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.filterBtn:not([data-active="true"]):hover {
+  border-color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
 
-/* ---- Filmstrip area — fills remaining viewport height ---- */
-.filmstripViewport {
-  flex: 1;
-  overflow: hidden;
+/* ---- Entry list ---- */
+.entryList {
   display: flex;
-  align-items: stretch;
-  /* Single source: inherits --container-pad from globals */
-  padding: var(--space-4) var(--container-pad) var(--space-6);
-}
-
-/* ---- Filmstrip — translates horizontally via scroll ---- */
-.filmstrip {
-  display: flex;
-  gap: var(--space-2); /* 16px token — consistent at all breakpoints */
-  height: 100%;
-  will-change: transform;
-}
-
-/* ---- Individual card slide ---- */
-.slide {
-  flex: 0 0 80vw;
-  height: 100%;
-}
-
-@media (min-width: 640px) {
-  .slide {
-    flex: 0 0 52vw;
-  }
-}
-
-@media (min-width: 1024px) {
-  .slide {
-    /* cap at 400px so cards don't balloon on 1440+ screens */
-    flex: 0 0 min(400px, 34vw);
-  }
-}
-
-@media (min-width: 1440px) {
-  .slide {
-    flex: 0 0 360px;
-  }
+  flex-direction: column;
 }

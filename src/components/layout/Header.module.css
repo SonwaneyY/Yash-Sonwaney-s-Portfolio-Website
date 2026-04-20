@@ -1,5 +1,6 @@
 .header {
   padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule);
 }
 
 .inner {
@@ -9,16 +10,43 @@
 }
 
 .monogram {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
-  transition: color 200ms ease;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 400ms ease;
 }
 
 .monogram:hover {
-  color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* Location pin */
+.location {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+@media (min-width: 768px) {
+  .location {
+    display: inline-flex;
+  }
+}
+
+.locationIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  position: relative;
+  top: -0.5px;
 }
 
 /* Desktop nav */
@@ -35,12 +63,14 @@
 }
 
 .navLink {
-  font-family: var(--font-sans);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-tertiary);
   position: relative;
-  transition: color 200ms ease;
+  transition: color 400ms ease;
 }
 
 .navLink::after {
@@ -53,11 +83,11 @@
   background-color: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 200ms ease;
+  transition: transform 400ms ease;
 }
 
 .navLink:hover {
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 .navLink:hover::after {
@@ -65,14 +95,50 @@
 }
 
 .navLinkActive {
-  color: var(--accent);
+  color: var(--text-secondary);
 }
 
 .navLinkActive::after {
   transform: scaleX(1);
 }
 
-/* Hamburger button */
+/* Email copy wrapper + toast */
+.emailWrapper {
+  position: relative;
+}
+
+.copiedToast {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--rule);
+  padding: 8px 12px;
+  pointer-events: none;
+  animation: toastIn 0.2s ease forwards;
+}
+
+.copiedToast svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hamburger */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -87,8 +153,8 @@
 }
 
 .hamburgerLine {
-  width: 24px;
-  height: 1.5px;
-  background-color: var(--text-primary);
-  transition: background-color 200ms ease;
+  width: 22px;
+  height: 1px;
+  background-color: var(--text-secondary);
+  transition: background-color 400ms ease;
 }

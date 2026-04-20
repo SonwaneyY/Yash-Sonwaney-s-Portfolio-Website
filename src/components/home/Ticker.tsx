@@ -9,6 +9,10 @@ const keywords = [
   "PRODUCT DESIGN",
   "UX DESIGN",
   "USER TESTING",
+  "SENSEMAKING",
+  "FACILITATION",
+  "VISUAL DESIGN",
+  "AI EXPERIENCE DESIGN",
 ];
 
 // 6 copies ensures the strip is wider than any viewport (incl. 5K displays)

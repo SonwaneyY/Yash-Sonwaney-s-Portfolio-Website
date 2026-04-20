@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./MobileMenu.module.css";
@@ -33,17 +34,54 @@ const linkVariants = {
 };
 
 export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    closeRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+
+      if (e.key === "Tab") {
+        const overlay = document.getElementById("mobile-menu");
+        if (!overlay) return;
+        const focusable = Array.from(
+          overlay.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
           className={styles.overlay}
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
-          <button className={styles.closeButton} onClick={onClose}>
+          <button ref={closeRef} className={styles.closeButton} onClick={onClose} aria-label="Close navigation menu">
             Close
           </button>
 
